@@ -17,7 +17,8 @@ use Yii;
 use yii\web\Controller;
 use yii\web\Response;
 use common\models\Setting;
-
+use common\models\District;
+use common\models\Province;
 class AjaxController extends Controller
 {
     public function beforeAction($action)
@@ -96,7 +97,19 @@ class AjaxController extends Controller
                 return $model->save();
             }
         }
+        return false;
 
+    }
 
+    public function actionGetDistrictByProvinceId($proince_id)
+    {
+        $districts = District::find()
+            ->where(['id_tinh' => $proince_id])
+            ->orderBy('id DESC')
+            ->all();
+        echo "<option value=''>" . Yii::t('app', '-- Chọn Huyện --') . "</option>";
+        foreach ($districts as $key => $value):
+            echo "<option value=" . $value['id'] . ">" . $value['ten'] . "</option>";
+        endforeach;
     }
 }

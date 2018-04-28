@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\helpers\FunctionHelper;
 use Yii;
 use common\models\Post;
 use common\models\base\PostSearch;
@@ -9,10 +10,11 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use backend\controllers\base\AdminController;
 /**
  * PostController implements the CRUD actions for Post model.
  */
-class PostController extends Controller
+class PostController extends AdminController
 {
     /**
      * {@inheritdoc}
@@ -72,6 +74,7 @@ class PostController extends Controller
             }
 
             if ($model->save()) {
+                $model->slug=FunctionHelper::changeTitle($model->title)."-".$model->id;
                 return $this->redirect(['index', 'id' => $model->id]);
             }
         }

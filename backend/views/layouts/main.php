@@ -7,7 +7,23 @@
 use backend\assets\AdminAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use common\models\User;
+use yii\web\NotFoundHttpException;
 
+$user = null;
+
+if (!Yii::$app->user->isGuest) {
+    $user = findModel(Yii::$app->user->identity->getId());
+}
+
+function findModel($id)
+{
+    if (($model = User::findOne($id)) !== null) {
+        return $model;
+    } else {
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+}
 AdminAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -43,14 +59,14 @@ AdminAsset::register($this);
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="/uploads/img-user/user-30-10.jpg" class="user-image" alt="User Image">
-                            <span class="hidden-xs">Alexander Pierce</span>
+                            <span class="hidden-xs"><?= $user['username']?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
                                 <img src="/uploads/img-user/user-30-10.jpg" class="img-circle" alt="User Image">
 
                                 <p>
-                                    Alexander Pierce - Web Developer
+                                    <?= $user['username'] ?>
                                     <small>Member since Nov. 2012</small>
                                 </p>
                             </li>
@@ -91,7 +107,7 @@ AdminAsset::register($this);
                     <img src="/uploads/img-user/user-30-10.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Alexander Pierce</p>
+                    <p> <?= $user['username'] ?></p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
@@ -141,6 +157,7 @@ AdminAsset::register($this);
 <!--                        </span>-->
 <!--                    </a>-->
 <!--                </li>-->
+                <?php if ($user['permission'] == User::RULE_SENIOR): ?>
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-cogs"></i> <span>Cài đặt nâng cao</span>
@@ -149,12 +166,11 @@ AdminAsset::register($this);
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="<?=Url::to(['page/index']) ?>"><i class="fa fa-circle-o"></i> Quản lý trang</a></li>
-<!--                        <li><a href="--><?//= Url::to(['location-image/index']) ?><!--"><i class="fa fa-circle-o"></i> Quản lý hình ảnh</a>-->
-<!--                        </li>-->
-<!--                        <li><a href="--><?//= Url::to(['setting/index']) ?><!--"><i class="fa fa-circle-o"></i> Quản lý cấu hình</a>-->
-<!--                        </li>-->
+                        <li><a href="<?= Url::to(['staff/index']) ?>"><i class="fa fa-circle-o"></i> Quản lý nhân viên</a>
+                        </li>
                     </ul>
                 </li>
+                <?php endif;?>
 
             </ul>
         </section>

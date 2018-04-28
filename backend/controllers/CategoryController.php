@@ -68,9 +68,10 @@ class CategoryController extends Controller
 
         if ($model->load(Yii::$app->request->post()) ) {
             $slug = $model->title;
-            $model->slug = FunctionHelper::changeTitle($slug)."-";
             $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+            $model->slug = FunctionHelper::changeTitle($slug)."-".$model->id;
+            $model->save();
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -90,7 +91,7 @@ class CategoryController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index',]);
         }
 
         return $this->render('update', [

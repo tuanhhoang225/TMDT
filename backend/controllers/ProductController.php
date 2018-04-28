@@ -2,17 +2,18 @@
 
 namespace backend\controllers;
 
+use common\helpers\FunctionHelper;
 use Yii;
 use common\models\Product;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
-
+use backend\controllers\base\AdminController;
 /**
  * ProductController implements the CRUD actions for Product model.
  */
-class ProductController extends Controller
+class ProductController extends AdminController
 {
     /**
      * {@inheritdoc}
@@ -72,6 +73,8 @@ class ProductController extends Controller
             }
 
             if ($model->save()) {
+                $model->slug= FunctionHelper::changeTitle($model->title)."-".$model->id;
+                $model->save();
                 return $this->redirect(['index', 'id' => $model->id]);
             }
         }

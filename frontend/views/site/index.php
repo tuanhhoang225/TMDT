@@ -4,7 +4,7 @@
 
 use common\helpers\FunctionHelper;
 
-$this->title = 'My Yii Application';
+$this->title = 'Beauty Shop';
 ?>
 <?= $this->render('banner') ?>
 <div class="content">

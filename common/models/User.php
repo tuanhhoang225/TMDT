@@ -8,4 +8,5 @@ class User extends base\User
     const RULE_SENIOR = 'RULE_SENIOR';
     const RULE_ADMIN = 'RULE_ADMIN';
     const RULE_USER = 'RULE_USER';
+    const RULE_STAFF = 'RULE_STAFF';
 }

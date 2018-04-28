@@ -60,7 +60,6 @@ class SeniorController extends Controller
                         'allow' => true,
                         'roles' => [
                             User::RULE_SENIOR,
-                            User::RULE_ADMIN,
                         ]
                     ]
                 ],
