@@ -35,12 +35,9 @@ class OrderDetailController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new OrderDetailSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+        $orderdetail = OrderDetail::find()->all();
+        return $this->render('index',[
+            'orderdetail' => $orderdetail,
         ]);
     }
 

@@ -10,6 +10,7 @@ namespace common\helpers;
 
 use common\models\Category;
 use common\models\Image;
+use common\models\OrderDetail;
 use common\models\Post;
 use common\models\Product;
 use yii\web\BadRequestHttpException;
@@ -59,7 +60,6 @@ class FunctionHelper
 
         return $limit == 1 ? $query->one() : $query->all();
     }
-
     public static function get_categories_by_parent_slug()
     {
 
@@ -111,6 +111,14 @@ class FunctionHelper
 
     public static function get_product_by_category($category_id,$limit=null){
         $query = Product::find()->where(['=','category_id',$category_id]);
+        if ($limit) {
+            $query->limit($limit);
+        }
+        return $limit == 1 ? $query->one() : $query->all();
+    }
+
+    public static function get_orderdetail_by_order($order_id,$limit=null){
+        $query = OrderDetail::find()->where(['=','order_id',$order_id]);
         if ($limit) {
             $query->limit($limit);
         }

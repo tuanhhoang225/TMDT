@@ -149,6 +149,14 @@ AdminAsset::register($this);
                         </span>
                     </a>
                 </li>
+                <li>
+                    <a href="<?= Url::to(['order/index']) ?>">
+                        <i class="fa fa-product-hunt"></i>
+                        <span>Quản lý đặt hàng</span>
+                        <span class="pull-right-container">
+                        </span>
+                    </a>
+                </li>
 <!--                <li>-->
 <!--                    <a href="--><?//= Url::to(['image/index']) ?><!--">-->
 <!--                        <i class="fa fa-picture-o"></i>-->
