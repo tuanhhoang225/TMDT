@@ -5,10 +5,11 @@ use yii\grid\GridView;
 use yii\helpers\Url;
 use common\models\Province;
 use common\models\District;
+use common\helpers\FunctionHelper;
 /* @var $this yii\web\View */
 /* @var $customers \common\models\User */
 
-$this->title = Yii::t('app', 'Users');
+$this->title = Yii::t('app', 'Quản lý khách hàng');
 $this->params['breadcrumbs'][] = $this->title;
 
 function findProvince($id)
@@ -69,12 +70,9 @@ function findDistrict($id)
                             <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Họ tên</th>
-                                <th>SĐT</th>
-                                <th>Địa chỉ</th>
-                                <th>Action</th>
+                                <th>Khách hàng</th>
+                                <th>Số lần đặt hàng</th>
+                                <th>Tổng số tiền đặt hàng</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -93,11 +91,26 @@ function findDistrict($id)
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                        <h4 class="modal-title">Thông Tin Chi Tiết</h4>
+                                                        <h4 class="modal-title">Thông Tin Khách Hàng</h4>
                                                     </div>
                                                     <div class="modal-body">
                                                         <form role="form">
+                                                            <h5><b>Họ tên:</b></h5>
                                                             <?= $value['full_name']?>
+                                                        </form>
+                                                        <form role="form">
+                                                            <h5><b>Email:</b></h5>
+                                                            <?= $value['email']?>
+                                                        </form>
+                                                        <form role="form">
+                                                            <h5><b>Điện thoại:</b></h5>
+                                                            <?= $value['phone']?>
+                                                        </form>
+                                                        <form role="form">
+                                                            <h5><b>Địa chỉ:</b></h5>
+                                                            <?= $value['address'] ?>,
+                                                            <?= findDistrict($value['district_id'])['ten']?>,
+                                                            <?= findProvince($value['province_id'])['ten']?>
                                                         </form>
                                                     </div>
                                                     <div class="modal-footer">
@@ -109,33 +122,12 @@ function findDistrict($id)
 
                                     </td>
                                     <td>
-                                        <?= $value['email'] ?>
+                                        <?= FunctionHelper::get_total_order_by_customer($value['id']) ?>
                                     </td>
                                     <td>
-                                        <?= $value['full_name'] ?>
-                                    </td>
-                                    <td>
-                                        <?= $value['phone']?>
-                                    </td>
-                                    <td>
-                                        <?= $value['address'] ?>,
-                                        <?= findDistrict($value['district_id'])['ten']?>,
-                                        <?= findProvince($value['province_id'])['ten']?>
-                                    </td>
-                                    <td>
-                                        <a href="<?= Url::to(['customer/update', 'id' => $value['id']]) ?>">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <?= Html::a(Yii::t('app', '<i class="fa fa-trash-o"></i>'), ['delete', 'id' => $value['id']], [
-                                            'data' => [
-                                                'confirm' => Yii::t('app', 'Bạn có muốn xóa nhân viên này?'),
-                                                'method' => 'post',
-                                            ],
-                                        ]) ?>
+                                        <?= FunctionHelper::get_total_cost_by_customer($value['id']) ?>
                                     </td>
                                 </tr>
-
-
                             <?php endforeach; ?>
                             </tbody>
                         </table>
