@@ -41,8 +41,17 @@ use yii\helpers\ArrayHelper;
                     <div class="form-group">
                         <?= $form->field($model, 'sale')->textInput(['maxlength' => true]) ?>
                     </div>
-                    <div class="form-group">
-                        <?= $form->field($model, 'content')->textInput(['maxlength' => true]) ?>
+                    <div class="col-md-12">
+                        <div class="box box-info">
+                            <div class="box-header">
+                                <h3 class="box-title"><?= Yii::t('app', 'Nội dung sản phẩm') ?></h3>
+                            </div>
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <?= $form->field($model, 'content')->textarea(['id' => 'content']) ?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">

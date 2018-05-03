@@ -248,16 +248,20 @@ class FunctionHelper
 
     }
 
-    public static function get_cost_order_detail_by_product(){
-        $result = OrderDetail::find()->joinWith('Product')->where(['=','product_id','Product.id'])->all();
-        $cost = 0;
+
+
+    public static function get_cost_order_detail_by_product($id_order_detail){
+        $result = OrderDetail::find()->where(['=','order_detail.id',$id_order_detail])->one();
+        $product = Product::findOne($result['product_id']);
+        return $result['quantily'] * $product['price'];
+
     }
     public static function get_total_cost_order_by_order_detail($id_order)
     {
         $cost_order = 0;
         $order_details = OrderDetail::find()->where(['=', 'order_id', $id_order])->all();
         for ($i = 0; $i < count($order_details); $i++) {
-            $cost_order += ($order_details[$i]['quantily'] * $cost_order[$i]['cost']);
+            $cost_order += self::get_cost_order_detail_by_product($order_details[$i]['id']);
         }
         return $cost_order;
     }

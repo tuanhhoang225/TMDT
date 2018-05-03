@@ -28,6 +28,8 @@ class AdminAsset extends AssetBundle
         'theme/dist/js/adminlte.min.js',
         'bootstrap/js/bootstrap-switch.min.js',
         'theme/bootstrap/dist/js/bootstrap.min.js',
+        'ckeditor/ckeditor.js',
+        'ckeditor/samples/js/sample.js',
         'js/notify.js',
         'js/setting.js'
     ];

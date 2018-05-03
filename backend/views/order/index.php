@@ -6,20 +6,30 @@ use yii\helpers\Url;
 use common\models\User;
 use common\models\Product;
 use common\helpers\FunctionHelper;
-
+use common\models\District;
+use common\models\Province;
 /* @var $this yii\web\View */
 /* @var $order common\models\Order */
 /* @var $orderdetail common\models\OrderDetail */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Orders');
+$this->title = Yii::t('app', 'Đặt hàng');
 $this->params['breadcrumbs'][] = $this->title;
 function findUser($user_id)
 {
     $user = User::findOne($user_id);
     return $user;
 }
-
+function findProvince($province_id)
+{
+    $province = Province::findOne($province_id);
+    return $province;
+}
+function findDistrict($district_id)
+{
+    $district = District::findOne($district_id);
+    return $district;
+}
 function findProduct($product_id)
 {
     $product = Product::findOne($product_id);
@@ -66,8 +76,8 @@ function findProduct($product_id)
 
                                 <th>STT</th>
                                 <th></th>
-                                <th>Khach hang</th>
-                                <th>Dia chi</th>
+                                <th>Khách hàng</th>
+                                <th>Địa chỉ</th>
                                 <th>Ngày tạo hóa đơn</th>
                                 <th>Tổng</th>
                                 <th>Action</th>
@@ -89,7 +99,7 @@ function findProduct($product_id)
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal">&times;
                                                     </button>
-                                                    <h4 class="modal-title">Chi Tiết</h4>
+                                                    <h4 class="modal-title">Chi Tiết Đơn Hàng</h4>
                                                 </div>
                                                 <div class="modal-body">
                                                     <table id="classTable" class="table table-bordered">
@@ -106,7 +116,7 @@ function findProduct($product_id)
                                                             <tr>
 
                                                                 <td>
-                                                                    <?= $key + 1 ?>
+                                                                    <?= $k + 1 ?>
                                                                 </td>
                                                                 <td>
                                                                     <?= findProduct($val['product_id'])['title'] ?>
@@ -115,7 +125,7 @@ function findProduct($product_id)
                                                                     <?= $val['quantily'] ?>
                                                                 </td>
                                                                 <td>
-                                                                    <?= $val['cost'] ?>
+                                                                    <?= FunctionHelper::get_cost_order_detail_by_product($val['id']) ?>
                                                                 </td>
 
                                                             </tr>
@@ -139,13 +149,15 @@ function findProduct($product_id)
                                 <?= findUser($value['user_id'])['username'] ?>
                             </td>
                             <td>
-                                <?= $value['address_detail'] ?>
+                                <?= $value['address_detail'] ?>,
+                                <?= findDistrict($value['district_id'])['ten'] ?>,
+                                <?= findProvince($value['province_id'])['ten'] ?>
                             </td>
                             <td>
                                 <?= $value['create_at'] ?>
                             </td>
                             <td>
-                                <?= $value['total_amount'] ?>
+                                <?= FunctionHelper::get_total_cost_order_by_order_detail($value['id']) ?>
                             </td>
                             <td>
                                 <a href="<?= Url::to(['order/update', 'id' => $value['id']]) ?>">
@@ -158,7 +170,6 @@ function findProduct($product_id)
                                     ],
                                 ]) ?>
                             </td>
-                                <?php endforeach; ?>
                             </tr>
                             </tbody>
                             <?php endforeach; ?>

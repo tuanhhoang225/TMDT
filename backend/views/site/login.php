@@ -7,29 +7,30 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
+
+
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="form-box" id="login-box">
+    <div class="header"><?= Yii::t('app', 'Sign In') ?></div>
 
-    <p>Please fill out the following fields to login:</p>
-
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-                <?= $form->field($model, 'password')->passwordInput() ?>
-
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                </div>
-
-            <?php ActiveForm::end(); ?>
+    <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+    <div class="body bg-gray">
+        <div class="form-group">
+            <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'placeholder' => Yii::t('app', 'Username')])->label(Yii::t('app', 'Username')) ?>
+        </div>
+        <div class="form-group">
+            <?= $form->field($model, 'password')->passwordInput(['placeholder' => Yii::t('app', 'Password')])->label(Yii::t('app', 'Password')) ?>
+        </div>
+        <div class="form-group">
+            <?= $form->field($model, 'rememberMe')->checkbox()->label(Yii::t('app', 'Remember Me')) ?>
         </div>
     </div>
+    <div class="footer">
+        <button type="submit" class="btn bg-olive btn-block">
+            <?= Yii::t('app', 'Sign me in') ?>
+        </button>
+    </div>
+    <?php ActiveForm::end(); ?>
 </div>
