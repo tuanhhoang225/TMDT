@@ -8,6 +8,7 @@ use yii\base\Model;
  */
 class SignupForm extends Model
 {
+    public $id;
     public $username;
     public $full_name;
     public $email;
@@ -15,6 +16,7 @@ class SignupForm extends Model
     public $permission;
     public $address;
     public $password;
+    public $status;
     public $re_password;
     public $phone;
     public $province_id;
@@ -36,10 +38,10 @@ class SignupForm extends Model
             ['email', 'unique', 'targetClass' => '\common\models\base\User', 'message' => 'This username has already been taken.'],
             ['email', 'string', 'min' => 2, 'max' => 255],
 
-            [['name', 'anh', 'email'], 'trim'],
-            ['name', 'required'],
-            [['name', 'anh', 'email'], 'string'],
-            [['name', 'anh', 'email'], 'string', 'max' => 255],
+            [['full_name', 'avatar', 'email'], 'trim'],
+            ['full_name', 'required'],
+            [['full_name', 'avatar', 'email'], 'string'],
+            [['full_name', 'avatar', 'email'], 'string', 'max' => 255],
 
             [['permission', 'address','phone','avatar'], 'string'],
 
@@ -66,7 +68,7 @@ class SignupForm extends Model
 
         $user->email = $this->email;
         $user->username = $this->username;
-        $user['full_name'] = $this->name;
+        $user['full_name'] = $this->full_name;
         $user['avatar'] = $this->avatar;
         $user['permission'] = $this->permission;
         $user['phone'] = $this->phone;

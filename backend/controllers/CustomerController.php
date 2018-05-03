@@ -35,12 +35,9 @@ class CustomerController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => User::find(),
-        ]);
-
+        $customers = User::find()->where(['=','permission','RULE_USER'])->all();
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+            'customers' => $customers,
         ]);
     }
 

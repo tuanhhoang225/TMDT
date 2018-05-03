@@ -101,10 +101,10 @@ class AjaxController extends Controller
 
     }
 
-    public function actionGetDistrictByProvinceId($proince_id)
+    public function actionGetDistrictByProvinceId($province_id)
     {
         $districts = District::find()
-            ->where(['id_tinh' => $proince_id])
+            ->where(['id_tinh' => $province_id])
             ->orderBy('id DESC')
             ->all();
         echo "<option value=''>" . Yii::t('app', '-- Chọn Huyện --') . "</option>";

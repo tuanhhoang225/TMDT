@@ -56,11 +56,6 @@ use yii\helpers\ArrayHelper;
                             <?= $form->field($model, 'username')->textInput(['maxlength' => true])->label(Yii::t('app', 'Username')) ?>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <?= $form->field($model, 'password')->input('password')->label(Yii::t('app', 'Mật khẩu')) ?>
-                        </div>
-                    </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <?= $form->field($model, 'province_id')->dropDownList(

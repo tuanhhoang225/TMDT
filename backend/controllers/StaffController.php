@@ -50,9 +50,9 @@ class StaffController extends SeniorController
     public function actionCreate()
     {
         $model = new SignupForm();
-        $model->permission = User::RULE_ADMIN;
 
         if ($model->load(Yii::$app->request->post()) && $user = $model->signup() ) {
+            $user->permission = User::RULE_ADMIN;
             $user->save();
             return $this->redirect(['index']);
         }
@@ -63,18 +63,29 @@ class StaffController extends SeniorController
     }
 
     /**
-     * Updates an existing User model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @param $id
+     * @return string|\yii\web\Response
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model= new SignupForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $user = $this->findModel($id);
+
+        $model->full_name = $user['full_name'];
+        $model->username = $user['username'];
+        $model->password = $user['password_hash'];
+        $model->avatar = $user['avatar'];
+        $model->phone = $user['phone'];
+        $model->email = $user['email'];
+        $model->address = $user['address'];
+        $model->province_id = $user['province_id'];
+        $model->district_id = $user['district_id'];
+        $model->permission = User::RULE_ADMIN;
+
+        if ($model->load(Yii::$app->request->post()) && $model->update($id) ) {
+
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [

@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
     <section class="content" style="margin-top: 30px;">
         <div class="row">
             <div class="col-md-12">
-                <?= $this->render('_form', [
+                <?= $this->render('_form_update', [
                     'model' => $model
                 ]) ?>
             </div>

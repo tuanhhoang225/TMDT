@@ -27,6 +27,7 @@ class AdminAsset extends AssetBundle
         'theme/plugins/iCheck/icheck.min.js',
         'theme/dist/js/adminlte.min.js',
         'bootstrap/js/bootstrap-switch.min.js',
+        'theme/bootstrap/dist/js/bootstrap.min.js',
         'js/notify.js',
         'js/setting.js'
     ];

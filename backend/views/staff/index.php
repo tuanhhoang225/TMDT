@@ -3,11 +3,31 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
+use common\models\Province;
+use common\models\District;
+use yii\web\NotFoundHttpException;
 /* @var $this yii\web\View */
 /* @var $staff \common\models\User */
 
 $this->title = Yii::t('app', 'Quản lý nhân viên');
 $this->params['breadcrumbs'][] = $this->title;
+
+
+function findProvince($id)
+{
+    if (($model = Province::findOne($id)) !== null) {
+        return $model;
+    }
+
+}
+
+function findDistrict($id)
+{
+    if (($model = District::findOne($id)) !== null) {
+        return $model;
+    }
+
+}
 ?>
 <div class="user-index">
 
@@ -79,8 +99,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </td>
                                     <td>
                                         <?= $value['address'] ?>,
-                                        <?= $value['district_id']?>,
-                                        <?= $value['province_id']?>
+                                        <?= findDistrict($value['district_id'])['ten']?>,
+                                        <?= findProvince($value['province_id'])['ten']?>
                                     </td>
                                     <td>
                                         <a href="<?= Url::to(['staff/update', 'id' => $value['id']]) ?>">
