@@ -136,7 +136,6 @@ function findProduct($product_id)
                                             </div>
 
                                         </div>
-                                        <?php endforeach; ?>
 
                             </td>
                             <td>
@@ -162,7 +161,7 @@ function findProduct($product_id)
                                     ],
                                 ]) ?>
                             </td>
-
+                                <?php endforeach; ?>
                             </tr>
                             </tbody>
                         </table>
