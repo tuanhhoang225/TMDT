@@ -16,6 +16,7 @@ use common\models\Product;
 use yii\web\BadRequestHttpException;
 use fproject\components\DbHelper;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use common\models\Order;
 class FunctionHelper
 {
     /**
@@ -247,4 +248,39 @@ class FunctionHelper
 
     }
 
+    public static function get_cost_order_detail_by_product(){
+        $result = OrderDetail::find()->joinWith('Product')->where(['=','product_id','Product.id'])->all();
+        $cost = 0;
+    }
+    public static function get_total_cost_order_by_order_detail($id_order)
+    {
+        $cost_order = 0;
+        $order_details = OrderDetail::find()->where(['=', 'order_id', $id_order])->all();
+        for ($i = 0; $i < count($order_details); $i++) {
+            $cost_order += ($order_details[$i]['quantily'] * $cost_order[$i]['cost']);
+        }
+        return $cost_order;
+    }
+    /**
+     * @param $id_customer
+     * @return int|mixed
+     */
+    public static function get_total_cost_by_customer($id_customer)
+    {
+        $order = Order::find()->where(['=', 'user_id', $id_customer])->all();
+        $total_cost = 0;
+        for ($i = 0; $i < count($order); $i++) {
+            $total_cost += self::get_total_cost_order_by_order_detail($order[$i]['id']);
+        }
+        return $total_cost;
+    }
+    /**
+     * @param $id_customer
+     * @return int
+     */
+    public static function get_total_order_by_customer($id_customer)
+    {
+        $order = Order::find()->where(['=', 'user_id', $id_customer])->all();
+        return count($order);
+    }
 }

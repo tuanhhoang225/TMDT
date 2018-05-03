@@ -76,7 +76,6 @@ function findProduct($product_id)
                             <tbody>
                             <?php foreach ($order as $key => $value): ?>
                             <tr>
-
                                 <td>
                                     <?= $key + 1 ?>
                                 </td>
@@ -85,7 +84,6 @@ function findProduct($product_id)
                                     </a>
                                     <div class="modal fade" id="chitiet" role="dialog">
                                         <div class="modal-dialog">
-
                                             <!-- Modal content-->
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -97,7 +95,6 @@ function findProduct($product_id)
                                                     <table id="classTable" class="table table-bordered">
                                                         <thead>
                                                         <tr>
-
                                                             <th>STT</th>
                                                             <th>Sản phẩm</th>
                                                             <th>Số lượng</th>
@@ -136,7 +133,6 @@ function findProduct($product_id)
                                             </div>
 
                                         </div>
-                                        <?php endforeach; ?>
 
                             </td>
                             <td>
@@ -165,6 +161,7 @@ function findProduct($product_id)
 
                             </tr>
                             </tbody>
+                            <?php endforeach; ?>
                         </table>
 
                     </div>
