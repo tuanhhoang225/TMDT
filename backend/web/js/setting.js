@@ -1,3 +1,9 @@
+
+var content = $('#content');
+if (content.length !== 0) {
+    initContent();
+}
+
 var iCheck = $('input[type="checkbox"].minimal, input[type="radio"].minimal');
 
 iCheck.iCheck({

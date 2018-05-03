@@ -58,37 +58,22 @@ AdminAsset::register($this);
 
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="/uploads/img-user/user-30-10.jpg" class="user-image" alt="User Image">
                             <span class="hidden-xs"><?= $user['username']?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
-                                <img src="/uploads/img-user/user-30-10.jpg" class="img-circle" alt="User Image">
 
                                 <p>
                                     <?= $user['username'] ?>
-                                    <small>Member since Nov. 2012</small>
+                                    <small><?= $user['full_name']?></small>
                                 </p>
-                            </li>
-                            <li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
-                                </div>
                             </li>
                             <li class="user-footer">
                                 <div class="pull-left">
                                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="<?= Url::to(['site/logout']) ?>" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -102,15 +87,6 @@ AdminAsset::register($this);
     </header>
     <aside class="main-sidebar">
         <section class="sidebar">
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="/uploads/img-user/user-30-10.jpg" class="img-circle" alt="User Image">
-                </div>
-                <div class="pull-left info">
-                    <p> <?= $user['username'] ?></p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                </div>
-            </div>
 
             <ul class="sidebar-menu" data-widget="tree">
                 <li>
@@ -150,13 +126,21 @@ AdminAsset::register($this);
                     </a>
                 </li>
                 <li>
-                    <a href="<?= Url::to(['customer/index']) ?>">
-                        <i class="fa fa-user"></i>
-                        <span>Quản lý khách hàng</span>
+                    <a href="<?= Url::to(['order/index']) ?>">
+                        <i class="fa fa-product-hunt"></i>
+                        <span>Quản lý đặt hàng</span>
                         <span class="pull-right-container">
                         </span>
                     </a>
                 </li>
+<!--                <li>-->
+<!--                    <a href="--><?//= Url::to(['image/index']) ?><!--">-->
+<!--                        <i class="fa fa-picture-o"></i>-->
+<!--                        <span>Quản lý hình ảnh</span>-->
+<!--                        <span class="pull-right-container">-->
+<!--                        </span>-->
+<!--                    </a>-->
+<!--                </li>-->
                 <?php if ($user['permission'] == User::RULE_SENIOR): ?>
                 <li class="treeview">
                     <a href="#">

@@ -95,8 +95,17 @@ class PostController extends AdminController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->images = UploadedFile::getInstances($model, 'images');
+
+            if ($name = $model->upload()) {
+                $model->avatar = $name;
+            }
+
+            if ($model->save()) {
+                $model->slug=FunctionHelper::changeTitle($model->title)."-".$model->id;
+                return $this->redirect(['index', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [

@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\User;
 use Yii;
 use common\models\Order;
 use common\models\base\OrderSearch;
@@ -35,12 +36,9 @@ class OrderController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new OrderSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+        $order = Order::find()->all();
+        return $this->render('index',[
+            'order'=> $order,
         ]);
     }
 
@@ -56,6 +54,7 @@ class OrderController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+
 
     /**
      * Creates a new Order model.

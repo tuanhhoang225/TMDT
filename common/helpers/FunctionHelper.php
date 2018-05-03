@@ -10,14 +10,13 @@ namespace common\helpers;
 
 use common\models\Category;
 use common\models\Image;
-use common\models\Order;
 use common\models\OrderDetail;
 use common\models\Post;
 use common\models\Product;
 use yii\web\BadRequestHttpException;
 use fproject\components\DbHelper;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-
+use common\models\Order;
 class FunctionHelper
 {
     /**
@@ -62,7 +61,6 @@ class FunctionHelper
 
         return $limit == 1 ? $query->one() : $query->all();
     }
-
     public static function get_categories_by_parent_slug()
     {
 
@@ -80,7 +78,6 @@ class FunctionHelper
             ->joinWith('products')
             ->where(['category.slug' => $slug])->asArray()->one();
     }
-
     public static function get_post_by_slug($slug)
     {
         return Post::find()
@@ -113,9 +110,16 @@ class FunctionHelper
 
     }
 
-    public static function get_product_by_category($category_id, $limit = null)
-    {
-        $query = Product::find()->where(['=', 'category_id', $category_id]);
+    public static function get_product_by_category($category_id,$limit=null){
+        $query = Product::find()->where(['=','category_id',$category_id]);
+        if ($limit) {
+            $query->limit($limit);
+        }
+        return $limit == 1 ? $query->one() : $query->all();
+    }
+
+    public static function get_orderdetail_by_order($order_id,$limit=null){
+        $query = OrderDetail::find()->where(['=','order_id',$order_id]);
         if ($limit) {
             $query->limit($limit);
         }
@@ -244,21 +248,23 @@ class FunctionHelper
 
     }
 
-    public static function get_cost_order_detail_by_product(){
-        $result = OrderDetail::find()->joinWith('Product')->where(['=','product_id','Product.id'])->all();
-        $cost = 0;
-    }
 
+
+    public static function get_cost_order_detail_by_product($id_order_detail){
+        $result = OrderDetail::find()->where(['=','order_detail.id',$id_order_detail])->one();
+        $product = Product::findOne($result['product_id']);
+        return $result['quantily'] * $product['price'];
+
+    }
     public static function get_total_cost_order_by_order_detail($id_order)
     {
         $cost_order = 0;
         $order_details = OrderDetail::find()->where(['=', 'order_id', $id_order])->all();
         for ($i = 0; $i < count($order_details); $i++) {
-            $cost_order += ($order_details[$i]['quantily'] * $cost_order[$i]['cost']);
+            $cost_order += self::get_cost_order_detail_by_product($order_details[$i]['id']);
         }
         return $cost_order;
     }
-
     /**
      * @param $id_customer
      * @return int|mixed
@@ -272,7 +278,6 @@ class FunctionHelper
         }
         return $total_cost;
     }
-
     /**
      * @param $id_customer
      * @return int
@@ -282,5 +287,4 @@ class FunctionHelper
         $order = Order::find()->where(['=', 'user_id', $id_customer])->all();
         return count($order);
     }
-
 }
