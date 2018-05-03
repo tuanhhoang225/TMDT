@@ -4,9 +4,10 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use frontend\assets\ThemeAsset;
+use common\helpers\FunctionHelper;
+use frontend\assets\ParksAsset;
 
-ThemeAsset::register($this);
+ParksAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -14,20 +15,30 @@ ThemeAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php $this->registerCsrfMetaTags() ?>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=0"/>
+    <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <link rel="icon" href=""
+          type="image/x-icon">
+
+    <?= $this->render('link') ?>
 </head>
-<body>
+<body class="no-touch not-mobile" data-action="index" data-controller="shoppings" style="">
 <?php $this->beginBody() ?>
+
 
 <?= $this->render('header') ?>
 
-<?= $content ?>
 
+
+<?= $content ?>
 <?= $this->render('footer') ?>
 
+<script>
+    var frontend = "<?= Yii::$app->getHomeUrl() ?>";
+    console.log(frontend);
+</script>
 <?php $this->endBody() ?>
 </body>
 </html>
