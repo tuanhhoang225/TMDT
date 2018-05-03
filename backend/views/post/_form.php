@@ -14,7 +14,7 @@ use common\models\Category;
 
     <?php $form = ActiveForm::begin(); ?>
     <div class='row'>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="box box-primary">
                 <div class="box-header">
                     <h3 class="box-title">
@@ -30,8 +30,17 @@ use common\models\Category;
                     <div class="form-group">
                         <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
                     </div>
-                    <div class="form-group">
-                        <?= $form->field($model, 'content')->textInput(['maxlength' => true]) ?>
+                    <div class="col-md-12">
+                        <div class="box box-info">
+                            <div class="box-header">
+                                <h3 class="box-title"><?= Yii::t('app', 'Nội dung sản phẩm') ?></h3>
+                            </div>
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <?= $form->field($model, 'content')->textarea(['id' => 'content']) ?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <?= $form->field($model, 'images[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>

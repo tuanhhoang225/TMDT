@@ -22,7 +22,6 @@ class AdminAsset extends AssetBundle
         'bootstrap/css/bootstrap-switch.min.css'
     ];
     public $js = [
-        'js/ckeditor.js',
         'theme/jquery-ui/jquery-ui.min.js',
         'theme/plugins/iCheck/icheck.min.js',
         'theme/dist/js/adminlte.min.js',
