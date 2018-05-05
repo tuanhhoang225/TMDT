@@ -3,15 +3,31 @@
 namespace backend\controllers;
 
 use Yii;
-use yii\web\NotFoundHttpException;
-use backend\controllers\base\SeniorController;
 use common\models\Setting;
+use common\models\base\SettingSearch;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 
 /**
  * SettingController implements the CRUD actions for Setting model.
  */
-class SettingController extends SeniorController
+class SettingController extends Controller
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ];
+    }
 
     /**
      * Lists all Setting models.
@@ -21,8 +37,7 @@ class SettingController extends SeniorController
     {
         $settings = Setting::find()->all();
         return $this->render('index', [
-            'settings'=> $settings,
-            'user' => $this->user
+            'settings'=>$settings
         ]);
     }
 
@@ -34,10 +49,8 @@ class SettingController extends SeniorController
      */
     public function actionView($id)
     {
-        $settings = Setting::find()->all();
-        return $this->render('index', [
-            'settings'=> $settings,
-            'user' => $this->user
+        return $this->render('view', [
+            'model' => $this->findModel($id),
         ]);
     }
 

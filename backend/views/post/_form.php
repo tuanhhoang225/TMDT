@@ -46,9 +46,6 @@ use common\models\Category;
                         <?= $form->field($model, 'images[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
                     </div>
                     <div class="form-group">
-                        <?= $form->field($model, 'date')->textInput(['maxlength' => true]) ?>
-                    </div>
-                    <div class="form-group">
                         <?= $form->field($model, 'released')->checkbox(['class' => 'minimal none-action'])->label(false) ?>
                     </div>
 

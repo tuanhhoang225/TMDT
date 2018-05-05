@@ -18,8 +18,8 @@ class SettingSearch extends Setting
     public function rules()
     {
         return [
-            [['id', 'status', 'released'], 'integer'],
-            [['title', 'describe', 'content', 'key'], 'safe'],
+            [['id', 'released', 'status'], 'integer'],
+            [['title', 'avatar', 'key', 'describe', 'content', 'slug', 'images'], 'safe'],
         ];
     }
 
@@ -60,14 +60,17 @@ class SettingSearch extends Setting
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'status' => $this->status,
             'released' => $this->released,
+            'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'avatar', $this->avatar])
+            ->andFilterWhere(['like', 'key', $this->key])
             ->andFilterWhere(['like', 'describe', $this->describe])
             ->andFilterWhere(['like', 'content', $this->content])
-            ->andFilterWhere(['like', 'key', $this->key]);
+            ->andFilterWhere(['like', 'slug', $this->slug])
+            ->andFilterWhere(['like', 'images', $this->images]);
 
         return $dataProvider;
     }

@@ -3,12 +3,16 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
+use common\models\Category;
 /* @var $this yii\web\View */
 /* @var $posts common\models\Post */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Posts');
 $this->params['breadcrumbs'][] = $this->title;
+function findCategory($category_id){
+    return Category::findOne($category_id);
+}
 ?>
 <div class="post-index">
 
@@ -54,9 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <th>Category</th>
                                 <th>Title</th>
                                 <th>Content</th>
-                                <th>Avatar</th>
                                 <th>Date</th>
-                                <th>views</th>
                                 <th>Released</th>
                                 <th>Action</th>
                             </tr>
@@ -64,12 +66,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             <tbody>
                             <?php foreach ($posts as $key => $value): ?>
                                 <tr>
-
                                     <td>
                                         <?= $key + 1 ?>
                                     </td>
                                     <td>
-                                        <?= $value['category_id'] ?>
+                                        <?= findCategory($value['category_id'])['title'] ?>
                                     </td>
                                     <td>
                                         <?= $value['title'] ?>
@@ -78,13 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <?= $value['content'] ?>
                                     </td>
                                     <td>
-                                        <?= $value['avatar']?>
-                                    </td>
-                                    <td>
                                         <?= $value['date'] ?>
-                                    </td>
-                                    <td>
-                                        <?= $value['views'] ?>
                                     </td>
                                     <td>
                                         <div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini"

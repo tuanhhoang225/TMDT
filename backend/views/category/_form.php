@@ -35,13 +35,7 @@ use common\models\Page;
                         <?= $form->field($model, 'describe')->textInput(['maxlength' => true]) ?>
                     </div>
                     <div class="form-group">
-                        <?= $form->field($model, 'sequence')->textInput() ?>
-                    </div>
-                    <div class="form-group">
                         <?= $form->field($model, 'content')->textInput(['maxlength' => true]) ?>
-                    </div>
-                    <div class="form-group">
-                        <?= $form->field($model, 'status')->checkbox(['class' => 'minimal none-action'])->label(false) ?>
                     </div>
                     <div class="form-group">
                         <?= $form->field($model, 'released')->checkbox(['class' => 'minimal none-action'])->label(false) ?>
