@@ -47,7 +47,12 @@ myCheckbox.on('switchChange.bootstrapSwitch', function (event, status) {
     $.ajax(settings).done(function (response) {
         $('#loader').css('display', 'none');
 
-        $.notify('Cập nhật thành công', 'success');
+        if (response) {
+            $.notify('Cập nhật thành công', 'success');
+        }
+        else {
+            $.notify('Đã có lỗi xảy ra', 'error');
+        }
     });
 
 });

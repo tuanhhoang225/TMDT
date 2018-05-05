@@ -44,6 +44,7 @@ class CustomerController extends Controller
             ->orderBy('id DESC')->all();
         return $this->render('index', [
             'customers' => $customers,
+            'pages'=>$pagination
         ]);
     }
 

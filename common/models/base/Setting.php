@@ -9,11 +9,14 @@ use Yii;
  *
  * @property int $id
  * @property string $title
+ * @property string $avatar
+ * @property string $key
  * @property string $describe
  * @property string $content
- * @property string $key
- * @property int $status
  * @property int $released
+ * @property int $status
+ * @property string $slug
+ * @property string $images
  */
 class Setting extends \yii\db\ActiveRecord
 {
@@ -31,9 +34,11 @@ class Setting extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content'], 'string'],
-            [['status', 'released'], 'integer'],
-            [['title', 'describe', 'key'], 'string', 'max' => 255],
+            [['title', 'key'], 'required'],
+            [['content', 'images'], 'string'],
+            [['released', 'status'], 'integer'],
+            [['title', 'avatar', 'key', 'describe', 'slug'], 'string', 'max' => 255],
+            [['key'], 'unique'],
         ];
     }
 
@@ -45,11 +50,14 @@ class Setting extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'title' => Yii::t('app', 'Title'),
+            'avatar' => Yii::t('app', 'Avatar'),
+            'key' => Yii::t('app', 'Key'),
             'describe' => Yii::t('app', 'Describe'),
             'content' => Yii::t('app', 'Content'),
-            'key' => Yii::t('app', 'Key'),
-            'status' => Yii::t('app', 'Status'),
             'released' => Yii::t('app', 'Released'),
+            'status' => Yii::t('app', 'Status'),
+            'slug' => Yii::t('app', 'Slug'),
+            'images' => Yii::t('app', 'Images'),
         ];
     }
 }

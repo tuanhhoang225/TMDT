@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use backend\controllers\base\AdminController;
 use  yii\data\Pagination;
+
 /**
  * ProductController implements the CRUD actions for Product model.
  */
@@ -47,7 +48,7 @@ class ProductController extends AdminController
             ->orderBy('id DESC')->all();
         return $this->render('index', [
             'products' => $products,
-            'pages'=>$pagination
+            'pages' => $pagination
         ]);
     }
 
@@ -82,7 +83,7 @@ class ProductController extends AdminController
             }
 
             if ($model->save()) {
-                $model->slug= FunctionHelper::changeTitle($model->title)."-".$model->id;
+                $model->slug = FunctionHelper::changeTitle($model->title) . "-" . $model->id;
                 $model->save();
                 return $this->redirect(['index', 'id' => $model->id]);
             }
@@ -108,11 +109,13 @@ class ProductController extends AdminController
             $model->images = UploadedFile::getInstances($model, 'images');
 
             if ($name = $model->upload()) {
-                $model->avatar = $name;
+                if ($name) {
+                    $model->avatar = $name;
+                }
             }
 
             if ($model->save()) {
-                $model->slug= FunctionHelper::changeTitle($model->title)."-".$model->id;
+                $model->slug = FunctionHelper::changeTitle($model->title) . "-" . $model->id;
                 $model->save();
                 return $this->redirect(['index', 'id' => $model->id]);
             }
