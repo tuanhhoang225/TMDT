@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-
+use yii\helpers\Url;
 use common\helpers\FunctionHelper;
 
 $this->title = 'My Yii Application';
@@ -81,7 +81,7 @@ $this->title = 'My Yii Application';
 
                                                             </div>
                                                             <a class="box_name"
-                                                               href=""><b><?= $value['title'] ?></b></a>
+                                                               href="<?= Url::to(['site/view', 'category_slug' => $value['category']['slug'], 'content_slug' => $value['slug']]) ?>"><b><?= $value['title'] ?></b></a>
                                                             <div class="box_price">
                                                                 <?= number_format($value['price']) ?> đ
                                                             </div>
@@ -92,26 +92,11 @@ $this->title = 'My Yii Application';
                                                         </span>
                                                             </div>
                                                         </div>
-
                                                     </li>
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
                                         </ul>
                                     </div>
-                                    <ol class="flex-control-nav flex-control-paging">
-                                        <li><a href="" class="flex-active">1</a></li>
-                                        <li><a href="">2</a></li>
-                                        <li><a href="">3</a></li>
-                                        <li><a href="">4</a></li>
-                                        <li><a href="">5</a></li>
-                                    </ol>
-                                    <ul class="flex-direction-nav">
-                                        <li class="flex-nav-prev">
-                                            <a class="flex-prev flex-disabled" href="" tabindex="-1"></a>
-                                        </li>
-                                        <li class="flex-nav-next">
-                                            <a class="flex-next" href=""></a></li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -199,292 +184,41 @@ $this->title = 'My Yii Application';
                                             <?php endforeach; ?>
                                         </ul>
                                     </div>
-                                    <ol class="flex-control-nav flex-control-paging">
-                                        <li><a href="" class="flex-active">1</a></li>
-                                        <li><a href="">2</a></li>
-                                        <li><a href="">3</a></li>
-                                        <li><a href="">4</a></li>
-                                        <li><a href="">5</a></li>
-                                    </ol>
-                                    <ul class="flex-direction-nav">
-                                        <li class="flex-nav-prev"><a class="flex-prev flex-disabled"
-                                                                     href="" tabindex="-1"></a>
-                                        </li>
-                                        <li class="flex-nav-next"><a class="flex-next"
-                                                                     href=""></a></li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
             </div>
-            <div class="col-md-3 m-padding-right-3 m-padding-left-3 l-padding-left-3 d-padding-left-3">
+            <div class="col-md-3 m-padding-right-3 m-padding-left-3 l-padding-left-3 d-padding-left-3" >
                 <div class="abc"></div>
                 <section class="magazine_posts">
                     <div id="featured_posts">
-                        <a class="section_title hidden-xs hidden-sm" href="">LIXIBOX
-                            MAGAZINE</a>
-                        <div class="flexslider flexslider-mag-posts hidden-xs hidden-sm" data-slide="single"
-                             id="mag_posts">
+                        <a class="section_title hidden-xs hidden-sm" href="">LIXIBOX MAGAZINE</a><br><br><br>
+                        <div class="flexslider flexslider-mag-posts hidden-xs hidden-sm" data-slide="single" id="mag_posts">
                             <div class="flex-viewport" style="overflow: hidden; position: relative;">
-                                <ul class="slides"
-                                    style="width: 600%; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
-                                    <li class="flex-active-slide" data-thumb-alt=""
-                                        style="width: 227px; margin-right: 0px; float: left; display: block;">
-                                        <div class="post-item">
-                                            <div class="post-image" style="background-image: url(https://upload.lixibox.com/system/blogs/covers/000/000/355/thumb/lustre-cover-final-text.jpg?1524390003)">
-                                            </div>
+                                <ul class="slides" style="width: 600%; transition-duration: 0s; transform: translate3d(-454px, 0px, 0px);">
+                                    <li class="" data-thumb-alt="" style="width: 227px; margin-right: 0px; float: left; display: block;">
+                                        <?php foreach (FunctionHelper::get_product() as $key => $value): ?>
+                                            <?php if ($value['category_id'] == 37): ?>
+                                                <div class="post-item">
+                                            <img src="<?=$value['avatar']?>" style="height: 90px;width: 90px;-moz-background-size: cover;-o-background-size: cover;-webkit-background-size: cover;background-size: cover;background-position: center center;float: left;">
                                             <h2 class="post-title">
-                                                <span>LUSTRE MAKEUP - ĐẲNG CẤP TỪ THIẾT KẾ ĐẾN CHẤT LƯỢNG </span>
+                                                <span><?=$value['title']?></span>
                                             </h2>
-                                            <a class="link-block"
-                                               href=""><span><em class="hidden blog title"></em></span>
+                                            <a class="link-block" href=""><span><em class="hidden blog title"></em></span>
                                             </a>
                                         </div>
-                                        <div class="post-item">
-                                            <div class="post-image"
-                                                 style="background-image: url(https://upload.lixibox.com/system/blogs/covers/000/000/354/thumb/ruamatcover3.jpg?1523933787)"></div>
-                                            <h2 class="post-title">
-                                                <span>Giải mã sức hút của những dụng cụ rửa mặt “hot” nhất hiện nay</span>
-                                            </h2>
-                                            <a class="link-block"
-                                               href=""><span>
-<em class="hidden blog title"></em>
-</span>
-                                            </a></div>
-                                        <div class="post-item">
-                                            <div class="post-image"
-                                                 style="background-image: url(https://upload.lixibox.com/system/blogs/covers/000/000/353/thumb/chongnang-cover2.jpg?1523333243)"></div>
-                                            <h2 class="post-title">
-                                                <span>ĐỌC VỊ CHỈ SỐ CHỐNG NẮNG CHUẨN VÀ DỄ HIỂU NHẤT CHO NÀNG </span>
-                                            </h2>
-                                            <a class="link-block"
-                                               href="https://magazine.lixibox.com/magazine/doc-vi-chi-so-chong-nang-chuan-va-de-hieu-nhat-cho-nang"><span>
-<em class="hidden blog title"></em>
-</span>
-                                            </a></div>
-                                    </li>
-                                    <li data-thumb-alt=""
-                                        style="width: 227px; margin-right: 0px; float: left; display: block;">
-                                        <div class="post-item">
-                                            <div class="post-image"
-                                                 style="background-image: url(https://upload.lixibox.com/system/blogs/covers/000/000/352/thumb/taytrang-coverr.jpg?1522835043)"></div>
-                                            <h2 class="post-title">
-                                                <span>5 MẸO NHỎ HỮU ÍCH GIÚP CÔNG CUỘC TẨY TRANG TRỞ NÊN CỰC ĐƠN GIẢN</span>
-                                            </h2>
-                                            <a class="link-block"
-                                               href="https://magazine.lixibox.com/magazine/5-meo-nho-huu-ich-giup-cong-cuoc-tay-trang-tro-nen-cuc-don-gian"><span>
-<em class="hidden blog title"></em>
-</span>
-                                            </a></div>
-                                        <div class="post-item">
-                                            <div class="post-image"
-                                                 style="background-image: url(https://upload.lixibox.com/system/blogs/covers/000/000/351/thumb/dungcutannen-cover.jpg?1522237435)"></div>
-                                            <h2 class="post-title">
-                                                <span>Dụng cụ tán nền - Đừng để “lạc lối” giữa mê cung của cọ và mút!</span>
-                                            </h2>
-                                            <a class="link-block"
-                                               href="https://magazine.lixibox.com/magazine/dung-cu-tan-nen-dung-de-lac-loi-giua-me-cung-cua-co-va-mut"><span>
-<em class="hidden blog title"></em>
-</span>
-                                            </a></div>
-                                        <div class="post-item">
-                                            <div class="post-image"
-                                                 style="background-image: url(https://upload.lixibox.com/system/blogs/covers/000/000/350/thumb/COSDNA-COVER.jpg?1521460573)"></div>
-                                            <h2 class="post-title">
-                                                <span>TRỞ THÀNH “BÁC SĨ DA LIỄU" CHO CHÍNH MÌNH VỚI COSDNA</span>
-                                            </h2>
-                                            <a class="link-block"
-                                               href="https://magazine.lixibox.com/magazine/tro-thanh-bac-si-da-lieu-cho-chinh-minh-voi-cosdna"><span>
-<em class="hidden blog title"></em>
-</span>
-                                            </a></div>
-                                    </li>
-                                    <li data-thumb-alt=""
-                                        style="width: 227px; margin-right: 0px; float: left; display: block;">
-                                        <div class="post-item">
-                                            <div class="post-image"
-                                                 style="background-image: url(https://upload.lixibox.com/system/blogs/covers/000/000/349/thumb/CELEB_ITEMS_COVER.png?1520943092)"></div>
-                                            <h2 class="post-title">
-                                                <span>Sao dùng gì? Ngạc nhiên với những items siêu quen thuộc của sao.</span>
-                                            </h2>
-                                            <a class="link-block"
-                                               href="https://magazine.lixibox.com/magazine/sao-dung-gi-ngac-nhien-voi-nhung-items-sieu-quen-thuoc-cua-sao"><span>
-<em class="hidden blog title"></em>
-</span>
-                                            </a></div>
-                                        <div class="post-item">
-                                            <div class="post-image"
-                                                 style="background-image: url(https://upload.lixibox.com/system/blogs/covers/000/000/347/thumb/private-cover.jpg?1520484570)"></div>
-                                            <h2 class="post-title">
-                                                <span>TRẦM TRỒ SỰ KIỆN “SANG CHẢNH” RA MẮT LIXIBOX FLAGSHIP STORE</span>
-                                            </h2>
-                                            <a class="link-block"
-                                               href="https://magazine.lixibox.com/magazine/tram-tro-su-kien-sang-chanh-ra-mat-lixibox-flagship-store"><span>
-<em class="hidden blog title"></em>
-</span>
-                                            </a></div>
-                                        <div class="post-item">
-                                            <div class="post-image"
-                                                 style="background-image: url(https://upload.lixibox.com/system/blogs/covers/000/000/346/thumb/baby_skin_cover.png?1518086617)"></div>
-                                            <h2 class="post-title">
-                                                <span>KHÔNG PHẢI “DA EM BÉ”, ĐẸP CHUẨN HÀN PHẢI LÀ “DA TRONG VEO”</span>
-                                            </h2>
-                                            <a class="link-block"
-                                               href="https://magazine.lixibox.com/magazine/khong-phai-da-em-be-dep-chuan-han-phai-la-da-trong-veo"><span>
-<em class="hidden blog title"></em>
-</span>
-                                            </a></div>
+                                            <?php endif;?>
+                                        <?php endforeach;?>
                                     </li>
                                 </ul>
                             </div>
-                            <ol class="flex-control-nav flex-control-paging">
-                                <li><a href="#" class="flex-active">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                            </ol>
-                            <ul class="flex-direction-nav">
-                                <li class="flex-nav-prev"><a class="flex-prev flex-disabled" href="#" tabindex="-1"></a>
-                                </li>
-                                <li class="flex-nav-next"><a class="flex-next" href="#"></a></li>
-                            </ul>
-                        </div>
-                        <a class="section_title hidden-xs hidden-sm" href="https://magazine.lixibox.com/">LIXIBOX
-                            MAGAZINE</a>
-                        <div class="flexslider flexslider-mag-posts hidden-xs hidden-sm" data-slide="single"
-                             id="mag_posts">
-                            <div class="flex-viewport" style="overflow: hidden; position: relative;">
-                                <ul class="slides"
-                                    style="width: 600%; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
-                                    <li class="flex-active-slide" data-thumb-alt=""
-                                        style="width: 227px; margin-right: 0px; float: left; display: block;">
-                                        <div class="post-item">
-                                            <div class="post-image"
-                                                 style="background-image: url(https://upload.lixibox.com/system/blogs/covers/000/000/355/thumb/lustre-cover-final-text.jpg?1524390003)"></div>
-                                            <h2 class="post-title">
-                                                <span>LUSTRE MAKEUP - ĐẲNG CẤP TỪ THIẾT KẾ ĐẾN CHẤT LƯỢNG </span>
-                                            </h2>
-                                            <a class="link-block"
-                                               href="https://magazine.lixibox.com/magazine/lustre-makeup-dang-cap-tu-thiet-ke-den-chat-luong"><span>
-<em class="hidden blog title"></em>
-</span>
-                                            </a></div>
-                                        <div class="post-item">
-                                            <div class="post-image"
-                                                 style="background-image: url(https://upload.lixibox.com/system/blogs/covers/000/000/354/thumb/ruamatcover3.jpg?1523933787)"></div>
-                                            <h2 class="post-title">
-                                                <span>Giải mã sức hút của những dụng cụ rửa mặt “hot” nhất hiện nay</span>
-                                            </h2>
-                                            <a class="link-block"
-                                               href="https://magazine.lixibox.com/magazine/giai-ma-suc-hut-cua-nhung-dung-cu-rua-mat-hot-nhat-hien-nay"><span>
-<em class="hidden blog title"></em>
-</span>
-                                            </a></div>
-                                        <div class="post-item">
-                                            <div class="post-image"
-                                                 style="background-image: url(https://upload.lixibox.com/system/blogs/covers/000/000/353/thumb/chongnang-cover2.jpg?1523333243)"></div>
-                                            <h2 class="post-title">
-                                                <span>ĐỌC VỊ CHỈ SỐ CHỐNG NẮNG CHUẨN VÀ DỄ HIỂU NHẤT CHO NÀNG </span>
-                                            </h2>
-                                            <a class="link-block"
-                                               href="https://magazine.lixibox.com/magazine/doc-vi-chi-so-chong-nang-chuan-va-de-hieu-nhat-cho-nang"><span>
-<em class="hidden blog title"></em>
-</span>
-                                            </a></div>
-                                    </li>
-                                    <li data-thumb-alt=""
-                                        style="width: 227px; margin-right: 0px; float: left; display: block;">
-                                        <div class="post-item">
-                                            <div class="post-image"
-                                                 style="background-image: url(https://upload.lixibox.com/system/blogs/covers/000/000/352/thumb/taytrang-coverr.jpg?1522835043)"></div>
-                                            <h2 class="post-title">
-                                                <span>5 MẸO NHỎ HỮU ÍCH GIÚP CÔNG CUỘC TẨY TRANG TRỞ NÊN CỰC ĐƠN GIẢN</span>
-                                            </h2>
-                                            <a class="link-block"
-                                               href="https://magazine.lixibox.com/magazine/5-meo-nho-huu-ich-giup-cong-cuoc-tay-trang-tro-nen-cuc-don-gian"><span>
-<em class="hidden blog title"></em>
-</span>
-                                            </a></div>
-                                        <div class="post-item">
-                                            <div class="post-image"
-                                                 style="background-image: url(https://upload.lixibox.com/system/blogs/covers/000/000/351/thumb/dungcutannen-cover.jpg?1522237435)"></div>
-                                            <h2 class="post-title">
-                                                <span>Dụng cụ tán nền - Đừng để “lạc lối” giữa mê cung của cọ và mút!</span>
-                                            </h2>
-                                            <a class="link-block"
-                                               href="https://magazine.lixibox.com/magazine/dung-cu-tan-nen-dung-de-lac-loi-giua-me-cung-cua-co-va-mut"><span>
-<em class="hidden blog title"></em>
-</span>
-                                            </a></div>
-                                        <div class="post-item">
-                                            <div class="post-image"
-                                                 style="background-image: url(https://upload.lixibox.com/system/blogs/covers/000/000/350/thumb/COSDNA-COVER.jpg?1521460573)"></div>
-                                            <h2 class="post-title">
-                                                <span>TRỞ THÀNH “BÁC SĨ DA LIỄU" CHO CHÍNH MÌNH VỚI COSDNA</span>
-                                            </h2>
-                                            <a class="link-block"
-                                               href="https://magazine.lixibox.com/magazine/tro-thanh-bac-si-da-lieu-cho-chinh-minh-voi-cosdna"><span>
-<em class="hidden blog title"></em>
-</span>
-                                            </a></div>
-                                    </li>
-                                    <li data-thumb-alt=""
-                                        style="width: 227px; margin-right: 0px; float: left; display: block;">
-                                        <div class="post-item">
-                                            <div class="post-image"
-                                                 style="background-image: url(https://upload.lixibox.com/system/blogs/covers/000/000/349/thumb/CELEB_ITEMS_COVER.png?1520943092)"></div>
-                                            <h2 class="post-title">
-                                                <span>Sao dùng gì? Ngạc nhiên với những items siêu quen thuộc của sao.</span>
-                                            </h2>
-                                            <a class="link-block"
-                                               href="https://magazine.lixibox.com/magazine/sao-dung-gi-ngac-nhien-voi-nhung-items-sieu-quen-thuoc-cua-sao"><span>
-<em class="hidden blog title"></em>
-</span>
-                                            </a></div>
-                                        <div class="post-item">
-                                            <div class="post-image"
-                                                 style="background-image: url(https://upload.lixibox.com/system/blogs/covers/000/000/347/thumb/private-cover.jpg?1520484570)"></div>
-                                            <h2 class="post-title">
-                                                <span>TRẦM TRỒ SỰ KIỆN “SANG CHẢNH” RA MẮT LIXIBOX FLAGSHIP STORE</span>
-                                            </h2>
-                                            <a class="link-block"
-                                               href="https://magazine.lixibox.com/magazine/tram-tro-su-kien-sang-chanh-ra-mat-lixibox-flagship-store"><span>
-<em class="hidden blog title"></em>
-</span>
-                                            </a></div>
-                                        <div class="post-item">
-                                            <div class="post-image"
-                                                 style="background-image: url(https://upload.lixibox.com/system/blogs/covers/000/000/346/thumb/baby_skin_cover.png?1518086617)"></div>
-                                            <h2 class="post-title">
-                                                <span>KHÔNG PHẢI “DA EM BÉ”, ĐẸP CHUẨN HÀN PHẢI LÀ “DA TRONG VEO”</span>
-                                            </h2>
-                                            <a class="link-block"
-                                               href="https://magazine.lixibox.com/magazine/khong-phai-da-em-be-dep-chuan-han-phai-la-da-trong-veo"><span>
-<em class="hidden blog title"></em>
-</span>
-                                            </a></div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <ol class="flex-control-nav flex-control-paging">
-                                <li><a href="#" class="flex-active">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                            </ol>
-                            <ul class="flex-direction-nav">
-                                <li class="flex-nav-prev"><a class="flex-prev flex-disabled" href="#" tabindex="-1"></a>
-                                </li>
-                                <li class="flex-nav-next"><a class="flex-next" href="#"></a></li>
-                            </ul>
                         </div>
                     </div>
                 </section>
             </div>
-        </div>
     </section>
-
-
     <section class="container top-6" id="ask_lixibox">
         <div class="row">
             <div class="col-xs-12 m-padding-left-3 m-padding-right-3 top-10">
@@ -496,8 +230,8 @@ $this->title = 'My Yii Application';
                         <?php foreach (FunctionHelper::get_product() as $key => $value): ?>
                             <?php if ($value['category_id'] == 4): ?>
                                 <div class="item_expert col-xs-4 col-sm-2 col-md-2 bottom-20 l-padding-left-3 l-padding-right-3">
-                                    <a title="Lixibox Online" href="">
-                                        <img alt="Lixibox Online" class="lazyload img-responsive"
+                                    <a title="" href="">
+                                        <img alt="" class="lazyload img-responsive"
                                              src="<?= $value['avatar'] ?>">
                                         <span class="expert_name"><?= $value['title'] ?></span>
                                     </a>
@@ -561,17 +295,6 @@ $this->title = 'My Yii Application';
                                     <?php endforeach; ?>
                                 </ul>
                             </div>
-                            <ol class="flex-control-nav flex-control-paging">
-                                <li><a href="" class="flex-active">1</a></li>
-                                <li><a href="">2</a></li>
-                                <li><a href="">3</a></li>
-                            </ol>
-                            <ul class="flex-direction-nav">
-                                <li class="flex-nav-prev"><a class="flex-prev flex-disabled"
-                                                             href="" tabindex="-1"></a></li>
-                                <li class="flex-nav-next"><a class="flex-next" href=""></a>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -615,22 +338,6 @@ $this->title = 'My Yii Application';
                                         <?php endforeach;?>
                                     </ul>
                                 </div>
-                                <ol class="flex-control-nav flex-control-paging">
-                                    <li><a href="" class="flex-active">1</a></li>
-                                    <li><a href="">2</a></li>
-                                    <li><a href="">3</a></li>
-                                    <li><a href="">4</a></li>
-                                    <li><a href="">5</a></li>
-                                    <li><a href="">6</a></li>
-                                </ol>
-                                <ul class="flex-direction-nav">
-                                    <li class="flex-nav-prev">
-                                        <a class="flex-prev flex-disabled" href="" tabindex="-1"></a>
-                                    </li>
-                                    <li class="flex-nav-next">
-                                        <a class="flex-next" href=""></a>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -723,7 +430,7 @@ $this->title = 'My Yii Application';
 </div>
 <div id="fixed_social_links">
     <div>
-        <a class="facebook" href="https://www.facebook.com/lixiboxvn" target="_blank">
+        <a class="facebook" href="https://www.facebook.com/BeosCosmetics/" target="_blank">
             <i class="fa fa-facebook-official"></i>
         </a>
         <a class="instagram" href="https://instagram.com/lixibox/" target="_blank">
