@@ -11,147 +11,330 @@ use common\helpers\FunctionHelper;
 /** @var $product \common\models\Product */
 
 ?>
-<div class="banner-top">
+<div id="content">
     <div class="container">
-        <h1><?= $category['title']?></h1>
-        <em></em>
-        <h2><a href="<?= Url::to(['site/index']) ?>">Home</a><label>/</label><?= $category['title']?></h2>
-    </div>
-</div>
-<div class="single">
+        <div class="box_details clearfix" id="box_detail">
+            <div class="right">
+                <div class="clearfix" id="box_info">
+                    <div class="box">
+                        <ol class="breadcrumb flat">
+                            <li class="breadcrumb-item">
+                                <a href="">Beauty Box</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="">Bestsellers Beauty Box</a>
+                            </li>
+                        </ol>
+                        <h2 class="uppercase box-name">
+                            <?=$product['title']?>
+                        </h2>
+                        <div class="pull-right">
+                        </div>
+                        <div class="bottom-10 box_pictures mobile top-10 visible-sm visible-xs">
+                            <div class="text-center single_picture">
+                                <img alt="Hot Fun In The Summertime" src="https://upload.lixibox.com/system/pictures/files/000/025/705/large/1519788040.png">
+                            </div>
+                        </div>
 
-    <div class="container">
-        <div class="col-md-9">
-            <div class="col-md-5 grid">
-                <div class="flexslider">
+                        <p class="price clearfix hidden-sm hidden-xs">
+                            <span class="new-price">  <?=$product['price']?> </span>
+                        </p>
+                        <div id="variants">
+                            <script>
+                                var isDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+                                $('.js-select-variant-item').hover(function(e){
+                                    if(isDevice) {
+                                        return true;
+                                    }
+                                    var box_id = $(this).data('box-id')
+                                    $('#variants .current-color').toggleClass('hidden');
+                                    $('#variants .preview-color').html($(this).data('color-title'));
+                                    if(!$(this).hasClass('current-variant')) {
+                                        $('#previewer_variants img').addClass('hidden');
+                                        $('#previewer_variants .preview_box_' + box_id).removeClass('hidden');
+                                    }
+                                }, function(e){
+                                    if(isDevice) {
+                                        return true;
+                                    }
+                                    $('#previewer_variants img').addClass('hidden');
 
-                    <div class="flex-viewport" style="overflow: hidden; position: relative;"><ul class="slides" style="width: 1000%; transition-duration: 0s; transform: translate3d(-304px, 0px, 0px);"><li data-thumb="images/si2.jpg" class="clone" aria-hidden="true" style="width: 304px; float: left; display: block;">
-                                <div class="thumb-image"> <img src="<?= $product['avatar'] ?>" data-imagezoom="true" class="img-responsive" draggable="false"> </div>
-                            </li>
-                            <li data-thumb="images/si.jpg" style="width: 304px; float: left; display: block;" class="flex-active-slide">
-                                <div class="thumb-image"> <img src="<?= $product['avatar'] ?>" data-imagezoom="true" class="img-responsive" draggable="false"> </div>
-                            </li>
-                            <li data-thumb="images/si1.jpg" class="" style="width: 304px; float: left; display: block;">
-                                <div class="thumb-image"> <img src="<?= $product['avatar'] ?>" data-imagezoom="true" class="img-responsive" draggable="false"> </div>
-                            </li>
-                            <li data-thumb="images/si2.jpg" class="" style="width: 304px; float: left; display: block;">
-                                <div class="thumb-image"> <img src="<?= $product['avatar'] ?>" data-imagezoom="true" class="img-responsive" draggable="false"> </div>
-                            </li>
-                            <li data-thumb="images/si.jpg" style="width: 304px; float: left; display: block;" class="clone" aria-hidden="true">
-                                <div class="thumb-image"> <img src="<?= $product['avatar'] ?>" data-imagezoom="true" class="img-responsive" draggable="false"> </div>
-                            </li></ul></div><ol class="flex-control-nav flex-control-thumbs"><li><img src="images/si.jpg" class="flex-active" draggable="false"></li><li><img src="<?= $product['avatar'] ?>" draggable="false" class=""></li><li><img src="<?= $product['avatar'] ?>" draggable="false" class=""></li></ol><ul class="flex-direction-nav"><li class="flex-nav-prev"><a class="flex-prev" href="#">Previous</a></li><li class="flex-nav-next"><a class="flex-next" href="#">Next</a></li></ul></div>
-            </div>
-            <div class="col-md-7 single-top-in">
-                <div class="span_2_of_a1 simpleCart_shelfItem">
-                    <h3><?= $product['title']?></h3>
-                    <p class="in-para"> </p>
-                    <div class="price_single">
-                        <span class="reducedfrom item_price"><?= $product['sale']?></span>
-                        <a href="#">click for offer</a>
-                        <div class="clearfix"></div>
-                    </div>
-                    <h4 class="quick">Quick Overview:</h4>
-                    <p class="quick_desc"> <?=$product['content'] ?></p>
-                    <div class="wish-list">
-                        <ul>
-                            <li class="wish"><a href="#"><span class="glyphicon glyphicon-check" aria-hidden="true"></span>Add to Wishlist</a></li>
-                            <li class="compare"><a href="#"><span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span>Add to Compare</a></li>
-                        </ul>
-                    </div>
-                    <div class="quantity">
-                        <div class="quantity-select">
-                            <div class="entry value-minus">&nbsp;</div>
-                            <div class="entry value"><span>1</span></div>
-                            <div class="entry value-plus active">&nbsp;</div>
+                                    $('#variants .current-color').toggleClass('hidden');
+                                    $('#variants .preview-color').html('');
+                                });
+                            </script>
+
+                        </div>
+                        <div class="tab-pane" id="box_details" style="display: block; margin-bottom: 20px;">
+                            <?=$product['content']?>
+
+                        </div>
+                        <!-- Product Image for Mobile -->
+                        <div class="hidden-md hidden-lg">
+                        </div>
+                        <div class="clearfix">
+                            <form id="add-box" action="/cart" accept-charset="UTF-8" data-remote="true" method="post">
+                                <input name="utf8" type="hidden" value="✓"><input type="hidden" name="_method" value="create">
+                                <input type="hidden" name="box_id" id="box_id" value="5963">
+                                <input type="hidden" name="theme_id" id="theme_id">
+                                <input type="hidden" name="purchase_type" id="purchase_type" value="0">
+                                <input type="submit" name="commit" value="Thêm vào giỏ" class="hidden-sm hidden-xs button add-to-cart-btn" data-disable-with="Đang thêm">
+                            </form>
+                            <div class="hidden-sm hidden-xs">
+                                <div class="box_detail_favourite">
+                                    <a class="button love-btn" data-remote="true" rel="nofollow" data-method="post" href="">
+                                        <i class="fa fa-heart-o"></i>
+                                        <span class="hidden-xs">Yêu thích</span>
+                                    </a>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                    <!--quantity-->
-                    <script>
-                        $('.value-plus').on('click', function(){
-                            var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)+1;
-                            divUpd.text(newVal);
-                        });
-
-                        $('.value-minus').on('click', function(){
-                            var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
-                            if(newVal>=1) divUpd.text(newVal);
-                        });
-                    </script>
-                    <!--quantity-->
-
-                    <a href="#" class="add-to item_add hvr-skew-backward">Add to cart</a>
-                    <div class="clearfix"> </div>
+                    <hr class="hidden-sm hidden-xs">
+                </div>
+            </div>
+            <div class="left" style="width: 730px;">
+                <div class="bottom-10 box_pictures desktop hidden-sm hidden-xs top-10">
+                    <div class="text-center single_picture">
+                        <img alt="Hot Fun In The Summertime" src="<?=$product['avatar']?>">
+                    </div>
                 </div>
 
+                <!-- Nav tabs -->
+                <!-- LÀM BÌNH LUẬN FB Ở ĐÂY -->
+                <!-- Tab panes -->
             </div>
-            <div class="clearfix"> </div>
-
         </div>
-        <div class="col-md-3 product-bottom product-at">
-            <!--categories-->
-            <div class=" rsidebar span_1_of_left">
-                <h4 class="cate">Categories</h4>
-                <ul class="menu-drop">
-                    <?php foreach (FunctionHelper::get_categories_by_parent_id() as $key => $value): ?>
-                    <?php $children = FunctionHelper::get_categories_by_parent_id($value['id']); ?>
-                    <?php if (!$children): ?>
-                    <li class="item1"><a href="<?= Url::to(['site/view','category_slug' => $value['slug']]) ?>"><?= $value['title'] ?> </a>
-                    </li>
-                    <?php endif;?>
-                    <?php if($children) :?>
-                    <li class="item2"><a href="<?= Url::to(['site/view','category_slug' => $value['slug']]) ?>"><?= $value['title'] ?> </a>
-                        <ul class="cute" style="display: none;">
-                            <?php foreach ($children as $k => $va):?>
-                            <li class="subitem1"><a href="<?= Url::to(['site/view','category_slug' => $va['slug']],true) ?>"><?=$va['title'] ?></a></li>
-                            <?php endforeach;?>
-                        </ul>
-                    </li>
-                    <?php endif; ?>
-                    <?php endforeach;?>
-                </ul>
-            </div>
-            <!--initiate accordion-->
-            <script type="text/javascript">
-                $(function() {
-                    var menu_ul = $('.menu-drop > li > ul'),
-                        menu_a  = $('.menu-drop > li > a');
-                    menu_ul.hide();
-                    menu_a.click(function(e) {
-                        e.preventDefault();
-                        if(!$(this).hasClass('active')) {
-                            menu_a.removeClass('active');
-                            menu_ul.filter(':visible').slideUp('normal');
-                            $(this).addClass('active').next().stop(true,true).slideDown('normal');
-                        } else {
-                            $(this).removeClass('active');
-                            $(this).next().stop(true,true).slideUp('normal');
+    </div>
+    <script>
+        $(function(){
+            window.onpopstate = function(e) {
+                var state = e.state;
+                if(history.pushState && state) {
+                    var key_path = state.path;
+                    boxPictureSwiper();
+                }
+            };
+
+            document.body.scrollTop = 0;
+
+            function init_floating_box_info() {
+                var $box_info = $('#box_info'),
+                    $parent = $box_info.parent(),
+                    $footerBannersLixiselfie = $('#footer_banners_lixiselfie'),
+                    affixOffsetBottom = 100;
+
+                if($footerBannersLixiselfie.length > 0) {
+                    affixOffsetBottom = 450;
+                }
+                $box_info.affix({
+                    offset: {
+                        top: $('#header').outerHeight() + $('#navigation').outerHeight() - 30,
+                        bottom: $('#footer').outerHeight() + affixOffsetBottom
+                    }
+                });
+
+                function apply_fixes() {
+                    $box_info.width($parent.width());
+                    if ($box_info.hasClass("affix")) {
+                        $box_info.css({ left: $parent.offset().left });
+                    } else {
+                        $box_info.css({ left: 0 });
+                    }
+                }
+
+                function apply_fix_left() {
+                    $box_info.css({ left: 0 });
+                }
+
+                $box_info.on('affixed.bs.affix', apply_fixes);
+                $box_info.on('affixed-top.bs.affix', apply_fix_left);
+                $box_info.on('affixed-bottom.bs.affix', apply_fix_left);
+
+                var timer;
+
+                $(window).on("resize", function() {
+                    clearTimeout(timer);
+                    setTimeout(apply_fixes, 300);
+                });
+            }
+
+            // Alert comment
+            function alertCommentBox(comment_anchor) {
+                if(location.hash === '#discussions' && comment_anchor) {
+                    var $comment = $('#' + comment_anchor);
+                    $comment.addClass('alert');
+                    $comment.closest('.comments').show();
+                    $('html, body').animate({
+                        scrollTop: ($comment.offset().top - 100)
+                    }, 2000);
+                    setTimeout(function() { $comment.removeClass('alert') }, 6000);
+                }
+            }
+
+            function boxPictureSwiper() {
+                $('.box_pictures').each(function() {
+                    var big_picture = $(this).find('.big_picture');
+                    var thumbnails = $(this).find('.thumbnails');
+                    if (!big_picture.length || !thumbnails.length) {
+                        return;
+                    }
+                    var big_picture_slider = new Swiper(big_picture, {
+                        nextButton: big_picture.find('.swiper-button-next'),
+                        prevButton: big_picture.find('.swiper-button-prev'),
+                        effect: 'fade',
+                        preloadImages: false,
+                        lazyLoading: true,
+                        onSlideChangeEnd: function(swiper) {
+                            swiper.container.find('iframe').removeAttr('src');
+                            var slide = $(swiper.slides[swiper.activeIndex]);
+                            slide.find('iframe').each(function() {
+                                var iframe = $(this);
+                                iframe.attr('src', iframe.attr('video_src'));
+                            });
                         }
                     });
-
+                    var thumbnails_slider = new Swiper(thumbnails, {
+                        spaceBetween: 10,
+                        centeredSlides: true,
+                        slidesPerView: 'auto',
+                        touchRatio: 0.2,
+                        slideToClickedSlide: true
+                    });
+                    big_picture_slider.params.control = thumbnails_slider;
+                    thumbnails_slider.params.control = big_picture_slider
                 });
-            </script>
+            };
 
+            function loadVariant(path, data) {
+                if(path === '' || typeof(path) === undefined) {
+                    return false;
+                }
+                $.ajax({
+                    url: path,
+                    type: 'GET',
+                    data: data,
+                    success: function(response) {
+                        initLoadAndReload();
+                        if (history.pushState) {
+                            history.pushState({path: path}, null, path);
+                        }
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
 
-    </div>
+            function enableTab($tab) {
+                var $tabHeader = $('.tabs-header'),
+                    $tabContent = $('.tabs-content');
 
+                $tabHeader.find('span.line').show();
+                $tabHeader.find('a').removeClass('active');
+                $tab.addClass('active').find('span.line').hide();
+                $tab.prev().find('span.line').hide();
 
-    <!--brand-->
-    <div class="container">
-        <div class="brand">
-            <div class="col-md-3 brand-grid">
-                <img src="images/ic.png" class="img-responsive" alt="">
-            </div>
-            <div class="col-md-3 brand-grid">
-                <img src="images/ic1.png" class="img-responsive" alt="">
-            </div>
-            <div class="col-md-3 brand-grid">
-                <img src="images/ic2.png" class="img-responsive" alt="">
-            </div>
-            <div class="col-md-3 brand-grid">
-                <img src="images/ic3.png" class="img-responsive" alt="">
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-    <!--//brand-->
+                $tabContent.find('.tab-pane').hide();
+                $($tab.attr('href')).fadeIn('slow');
+            }
+
+            function resizeLayout() {
+                if($(window).width() >= 992) {
+                    $('.left').css('width', $('.box_details').width() - $('.right').width());
+                }
+            }
+
+            function scrollTopToElement(element, offsetTopMinus, callback) {
+                if ($(element).length > 0) {
+                    $('html, body').animate({
+                        scrollTop: $(element).offset().top - offsetTopMinus
+                    }, 1000).promise().done(function() {
+                        if(callback && typeof(callback) == 'function') { callback(); }
+                    });
+                }
+            }
+            function initLoadAndReload() {
+                resizeLayout();
+                boxPictureSwiper();
+                var array = ["#products", "#rates", "#discussions", "#shipment"];
+
+                if(location.hash && array.includes(location.hash)) {
+                    enableTab($('a[href="' + location.hash + '"]'));
+                } else {
+                    enableTab($('a[href="' + $('.tabs-header').data('tab-active') + '"]'));
+                }
+
+                alertCommentBox("")
+            }
+
+            (function() {
+                //init_floating_box_info();
+                enableFlexslider('.flexslider', {});
+                initLoadAndReload();
+            }());
+
+            $(window).resize(function() {
+                resizeLayout();
+                boxPictureSwiper();
+            });
+
+            $(document.body).on('click', '.tabs-header a', function(event) {
+                event.preventDefault();
+                enableTab($(this));
+            });
+
+            $("#province_id").change(function(){
+                updateDistrict($(this).val(), $("#district_id"));
+            });
+
+            $(document.body).on('click', '.show-more-less-arrow', function(event) {
+                event.preventDefault();
+                $(this).closest($(this).data('parent')).find($(this).data('target')).toggle();
+                $(this).toggleClass('active');
+            });
+
+            $(document.body).on('click', '.show-all-discussions', function(event) {
+                event.preventDefault();
+                enableTab($('a[href="#rates"]'));
+                scrollTopToElement('#box_detail_tab_content', 110, function() {});
+            });
+
+            $(document).on('click', '.collapsible-text .toggle', function() {
+                $(this).closest('.collapsible-text').toggleClass('collapsed');
+                $(this).closest('.collapsible-text').toggleClass('expanded');
+            });
+
+            $(document.body).on('change', '.js-select-option-size', function(e){
+                var option_value_id = $(this).val();
+                var path = $(this).data('url');
+                loadVariant(path, {option_value_id: option_value_id})
+                e.preventDefault();
+            });
+
+            $(document.body).on('click', '.js-select-variant-item', function(e) {
+                var path = $(this).attr('href');
+                loadVariant(path, {radom: Math.random()});
+                e.preventDefault();
+            });
+
+            // Popover for VIP program
+            $(".buy-hack-popover").popover({
+                content: 'BUY HACK là <b>chương trình giá sỉ</b> cho khách hàng <b>tích luỹ 4tr trong tháng</b>. <a href="/user/buy-hack">Xem chi tiết chương trình</a>',
+                html: true
+            });
+        });
+    </script>
+    <script>
+        setTimeout(function() {
+            window._fbq = window._fbq || [];
+            var fbTrackOptions = JSON.parse('{\"value\":990000,\"currency\":\"VND\",\"content_type\":\"product\",\"content_name\":\"Hot Fun In The Summertime\",\"content_ids\":5963}');
+            if (true) {
+                window._fbq.push(['track', 'ViewContent', fbTrackOptions]);
+            } else {
+                console.log("ViewContent", fbTrackOptions);
+            }
+        }, 300);
+    </script>
 </div>
