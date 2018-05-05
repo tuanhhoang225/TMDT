@@ -37,7 +37,7 @@ use yii\helpers\ArrayHelper;
                         </div>
                         <div class="form-group">
                             <div class="col-md-12">
-                                <?= $form->field($model, 'images[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
+                                <?= $form->field($model, 'images[]')->fileInput(['multiple' => true,'value' => 'werwer', 'accept' => 'image/*']) ?>
                             </div>
                             </div>
                         <div class="form-group">

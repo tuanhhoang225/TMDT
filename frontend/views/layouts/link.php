@@ -17,11 +17,7 @@
         transform: translateY(-50%)
     }
 </style>
-<script type="text/javascript" src="/lixibox/js/cc14aa76d7.js"></script>
-<script src="/lixibox/js/nr-1071.min.js"></script>
-<script id="facebook-jssdk" src="/lixibox/js/sdk.js"></script>
-<script src="/lixibox/js/111444749607939.js" async=""></script>
-<script async="" src="/lixibox/js/fbevents.js"></script>
+
 <script type="text/javascript">
     window.NREUM || (NREUM = {});   NREUM.info = {
         "beacon": "bam.nr-data.net",
@@ -240,17 +236,8 @@
         data-turbolinks-track="true"></script>
 <script src="/lixibox/js/main_page-b2f4f165eef6ee3cf6308db92b89bcbb0db47fa5db56d9f53bbf5912a3285557.js"
         data-turbolinks-track="true"></script>
-<meta name="csrf-param" content="authenticity_token">
-<meta name="csrf-token"
-      content="ipSDjlx2yKM52Wj12R+sqDFQxzsaT9QmiWpvICwJR4ftCy8CQFiJq6x22UkwnOZWM0KPfGFWawfhgC+WjOMoFA==">
-<script type="text/javascript" charset="UTF-8"
-        src="/lixibox/js/common.js"></script>
-<script type="text/javascript" charset="UTF-8"
-        src="/lixibox/js/util.js"></script>
-<script type="text/javascript" charset="UTF-8"
-        src="/lixibox/js/map.js"></script>
-<script type="text/javascript" charset="UTF-8"
-        src="/lixibox/js/marker.js"></script>
+
+
 <style type="text/css">
     .gm-style {
         font: 400 11px Roboto, Arial, sans-serif;
@@ -260,7 +247,6 @@
     .gm-style img {
         max-width: none;
     }</style>
-<script type="text/javascript" charset="UTF-8" src="/lixibox/js/onion.js"></script>
 <style type="text/css">
     .fb_hidden {
         position: absolute;
@@ -792,5 +778,3 @@
         transform: scale(1, 1)
     }
     }</style>
-<script type="text/javascript" charset="UTF-8"
-        src="/lixibox/js/stats.js"></script>
