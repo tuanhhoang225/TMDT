@@ -14,6 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 function findCategory($category_id){
     return Category::findOne($category_id);
 }
+
 ?>
 <div class="post-index">
 
@@ -70,6 +71,9 @@ function findCategory($category_id){
                                     <td>
                                         <?php if (isset($_GET['page'])):?>
                                             <?= $pages->defaultPageSize * ($_GET['page'] - 1) + $key + 1; ?>
+                                        <?php endif; ?>
+                                        <?php if (!isset($_GET['page'])):?>
+                                            <?=$key + 1; ?>
                                         <?php endif; ?>
                                     </td>
                                     <td>

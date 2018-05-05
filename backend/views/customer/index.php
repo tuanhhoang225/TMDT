@@ -6,9 +6,10 @@ use yii\helpers\Url;
 use common\models\Province;
 use common\models\District;
 use common\helpers\FunctionHelper;
+use yii\widgets\LinkPager;
 /* @var $this yii\web\View */
 /* @var $customers \common\models\User */
-
+/* @var $pages \yii\data\Pagination*/
 $this->title = Yii::t('app', 'Quản lý khách hàng');
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -80,7 +81,12 @@ function findDistrict($id)
                                 <tr>
 
                                     <td>
-                                        <?= $key + 1 ?>
+                                        <?php if (isset($_GET['page'])):?>
+                                            <?= $pages->defaultPageSize * ($_GET['page'] - 1) + $key + 1; ?>
+                                        <?php endif; ?>
+                                        <?php if (!isset($_GET['page'])):?>
+                                            <?=$key + 1; ?>
+                                        <?php endif; ?>
                                     </td>
                                     <td>
                                         <a data-toggle="modal" data-target="#myModal-<?= $value['id']?>" data-title="content">

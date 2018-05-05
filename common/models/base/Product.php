@@ -16,8 +16,11 @@ use Yii;
  * @property double $sale
  * @property string $content
  * @property string $slug
+ * @property int $released
  *
+ * @property OrderDetail[] $orderDetails
  * @property Category $category
+ * @property ShoppingCart[] $shoppingCarts
  */
 class Product extends \yii\db\ActiveRecord
 {
@@ -35,7 +38,7 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'price', 'amount'], 'integer'],
+            [['category_id', 'price', 'amount', 'released'], 'integer'],
             [['sale'], 'number'],
             [['content'], 'string'],
             [['title', 'avatar', 'slug'], 'string', 'max' => 255],
@@ -58,7 +61,16 @@ class Product extends \yii\db\ActiveRecord
             'sale' => Yii::t('app', 'Sale'),
             'content' => Yii::t('app', 'Content'),
             'slug' => Yii::t('app', 'Slug'),
+            'released' => Yii::t('app', 'Released'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOrderDetails()
+    {
+        return $this->hasMany(OrderDetail::className(), ['product_id' => 'id']);
     }
 
     /**
@@ -67,5 +79,13 @@ class Product extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getShoppingCarts()
+    {
+        return $this->hasMany(ShoppingCart::className(), ['product_id' => 'id']);
     }
 }

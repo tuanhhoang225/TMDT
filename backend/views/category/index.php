@@ -9,7 +9,6 @@ use yii\widgets\LinkPager;
 
 $this->title = Yii::t('app', 'Categories');
 $this->params['breadcrumbs'][] = $this->title;
-var_dump($pages); die;
 ?>
 <div class="category-index">
 
@@ -65,6 +64,9 @@ var_dump($pages); die;
                                     <td>
                                         <?php if (isset($_GET['page'])):?>
                                             <?= $pages->defaultPageSize * ($_GET['page'] - 1) + $key + 1; ?>
+                                        <?php endif; ?>
+                                        <?php if (!isset($_GET['page'])):?>
+                                            <?=$key + 1; ?>
                                         <?php endif; ?>
                                     </td>
                                     <td>

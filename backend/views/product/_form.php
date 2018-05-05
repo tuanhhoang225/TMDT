@@ -25,21 +25,21 @@ use yii\helpers\ArrayHelper;
                     <div class="col-md-12">
                         <div class="form-group">
                             <div class="col-md-12">
-                            <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+                                <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-12">
-
-                            <?= $form->field($model, 'category_id')->dropDownList(
+                                <?= $form->field($model, 'category_id')->dropDownList(
                                     ArrayHelper::map(Category::find()->where(['=', 'released', 1])->all(), 'id', 'title')) ?>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-12">
-                                <?= $form->field($model, 'images[]')->fileInput(['multiple' => true,'value' => 'werwer', 'accept' => 'image/*']) ?>
+                                <img src="<?= $model['avatar'] ?>" style="width: 200px;" alt="">
+                                <?= $form->field($model, 'images[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
                             </div>
-                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="col-md-4">
                                 <?= $form->field($model, 'price')->textInput() ?>
@@ -63,10 +63,13 @@ use yii\helpers\ArrayHelper;
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
                         <div class="form-group">
-                            <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+                            <?= $form->field($model, 'released')->checkbox(['class' => 'minimal none-action'])->label(false) ?>
                         </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+                            </div>
                         </div>
                     </div>
                 </div>

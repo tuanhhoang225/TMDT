@@ -58,6 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <th>Amount</th>
                                 <th>Content</th>
                                 <th>Sale</th>
+                                <th>Released</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -67,6 +68,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <td>
                                         <?php if (isset($_GET['page'])):?>
                                             <?= $pages->defaultPageSize * ($_GET['page'] - 1) + $key + 1; ?>
+                                        <?php endif; ?>
+                                        <?php if (!isset($_GET['page'])):?>
+                                            <?=$key + 1; ?>
                                         <?php endif; ?>
                                     </td>
                                     <td>
@@ -83,6 +87,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </td>
                                     <td>
                                         <?= $value['sale'] ?>
+                                    </td>
+                                    <td>
+                                        <div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini"
+                                             style="border:none">
+                                            <input data-id="<?= $value['id'] ?>" data-action="ajax/release"
+                                                   data-table="product"
+                                                   type="checkbox" <?= $value['released'] ? 'checked="checked"' : '' ?>
+                                                   title="" name="switch-checkbox">
+                                        </div>
                                     </td>
                                     <td>
                                         <a href="<?= Url::to(['product/update', 'id' => $value['id']]) ?>">

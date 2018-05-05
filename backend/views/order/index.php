@@ -102,6 +102,9 @@ function tong($a, $b){
                                     <?php if (isset($_GET['page'])):?>
                                         <?= $pages->defaultPageSize * ($_GET['page'] - 1) + $key + 1; ?>
                                     <?php endif; ?>
+                                    <?php if (!isset($_GET['page'])):?>
+                                        <?=$key + 1; ?>
+                                    <?php endif; ?>
                                 </td>
                                 <td>
                                     <a data-toggle="modal" data-target="#chitiet">Chi Tiết

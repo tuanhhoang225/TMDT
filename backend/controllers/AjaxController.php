@@ -51,18 +51,18 @@ class AjaxController extends Controller
                 case 'post':
                     $model = Post::findOne($post['id']);
                     break;
-
+                case 'product':
+                    $model = Product::findOne($post['id']);
+                    break;
                 default:
                     break;
 
-
             }
-
 
             if ($model) {
                 $model->released = $model->released ? 0 : 1;
 
-                return $model->save();
+                return $model->save(false);
             }
 
         }
