@@ -8,6 +8,7 @@ use common\models\Product;
 use common\helpers\FunctionHelper;
 use common\models\District;
 use common\models\Province;
+
 /* @var $this yii\web\View */
 /* @var $order common\models\Order */
 /* @var $orderdetail common\models\OrderDetail */
@@ -20,20 +21,27 @@ function findUser($user_id)
     $user = User::findOne($user_id);
     return $user;
 }
+
 function findProvince($province_id)
 {
     $province = Province::findOne($province_id);
     return $province;
 }
+
 function findDistrict($district_id)
 {
     $district = District::findOne($district_id);
     return $district;
 }
+
 function findProduct($product_id)
 {
     $product = Product::findOne($product_id);
     return $product;
+}
+
+function tong($a, $b){
+    return $a+ $b;
 }
 
 ?>
@@ -79,12 +87,16 @@ function findProduct($product_id)
                                 <th>Khách hàng</th>
                                 <th>Địa chỉ</th>
                                 <th>Ngày tạo hóa đơn</th>
-                                <th>Tổng</th>
+                                <th>Chi phí</th>
+                                <th>Phí ship</th>
+                                <th>Tổng chi phí</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach ($order as $key => $value): ?>
+                            <?php foreach ($order
+
+                            as $key => $value): ?>
                             <tr>
                                 <td>
                                     <?= $key + 1 ?>
@@ -144,32 +156,38 @@ function findProduct($product_id)
 
                                         </div>
 
-                            </td>
-                            <td>
-                                <?= findUser($value['user_id'])['username'] ?>
-                            </td>
-                            <td>
-                                <?= $value['address_detail'] ?>,
-                                <?= findDistrict($value['district_id'])['ten'] ?>,
-                                <?= findProvince($value['province_id'])['ten'] ?>
-                            </td>
-                            <td>
-                                <?= $value['create_at'] ?>
-                            </td>
-                            <td>
-                                <?= FunctionHelper::get_total_cost_order_by_order_detail($value['id']) ?>
-                            </td>
-                            <td>
-                                <a href="<?= Url::to(['order/update', 'id' => $value['id']]) ?>">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <?= Html::a(Yii::t('app', '<i class="fa fa-trash-o"></i>'), ['delete', 'id' => $value['id']], [
-                                    'data' => [
-                                        'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                                        'method' => 'post',
-                                    ],
-                                ]) ?>
-                            </td>
+                                </td>
+                                <td>
+                                    <?= findUser($value['user_id'])['username'] ?>
+                                </td>
+                                <td>
+                                    <?= $value['address_detail'] ?>,
+                                    <?= findDistrict($value['district_id'])['ten'] ?>,
+                                    <?= findProvince($value['province_id'])['ten'] ?>
+                                </td>
+                                <td>
+                                    <?= $value['create_at'] ?>
+                                </td>
+                                <td>
+                                    <?=  $a = FunctionHelper::get_total_cost_order_by_order_detail($value['id']) ?>
+                                </td>
+                                <td>
+                                    <?= $b = FunctionHelper::get_shipping_by_province($value['province_id'])?>
+                                </td>
+                                <td>
+                                    <?= tong($a,$b) ?>
+                                </td>
+                                <td>
+                                    <a href="<?= Url::to(['order/update', 'id' => $value['id']]) ?>">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <?= Html::a(Yii::t('app', '<i class="fa fa-trash-o"></i>'), ['delete', 'id' => $value['id']], [
+                                        'data' => [
+                                            'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                                            'method' => 'post',
+                                        ],
+                                    ]) ?>
+                                </td>
                             </tr>
                             </tbody>
                             <?php endforeach; ?>

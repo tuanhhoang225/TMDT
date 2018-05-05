@@ -19,15 +19,21 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title') ?>
 
-    <?= $form->field($model, 'describe') ?>
-
-    <?= $form->field($model, 'content') ?>
+    <?= $form->field($model, 'avatar') ?>
 
     <?= $form->field($model, 'key') ?>
 
-    <?php // echo $form->field($model, 'status') ?>
+    <?= $form->field($model, 'describe') ?>
+
+    <?php // echo $form->field($model, 'content') ?>
 
     <?php // echo $form->field($model, 'released') ?>
+
+    <?php // echo $form->field($model, 'status') ?>
+
+    <?php // echo $form->field($model, 'slug') ?>
+
+    <?php // echo $form->field($model, 'images') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

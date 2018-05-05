@@ -9,7 +9,7 @@ use Yii;
 use common\models\ThongTinChung;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-
+use common\models\Shipping;
 /**
  * ThongTinChungController implements the CRUD actions for ThongTinChung model.
  */
@@ -72,6 +72,24 @@ class ThongTinChungController extends Controller
             FunctionHelper::importDataExcel($table, $attributes, $file, $start, $end);
         }
 
+        return $this->redirect(['site/index']);
+    }
+
+    public function actionImportShipping(){
+        if(!Shipping::find()->asArray()->all()){
+            $table = 'shipping';
+            $attributes = [
+                'A' => 'id',
+                'B' => 'type',
+                'C' => 'cost',
+                'D' => 'province_id',
+            ];
+            $file = '../../uploads/core/excel/shipping.xlsx';
+            $start = 2;
+            $end = 64;
+            FunctionHelper::importDataExcel($table, $attributes, $file, $start, $end);
+
+        }
         return $this->redirect(['site/index']);
     }
 

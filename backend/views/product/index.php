@@ -51,7 +51,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 <th>STT</th>
                                 <th>Title</th>
-                                <th>Avatar</th>
                                 <th>Price</th>
                                 <th>Amount</th>
                                 <th>Content</th>
@@ -68,9 +67,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </td>
                                     <td>
                                         <?=$value['title'] ?>
-                                    </td>
-                                    <td>
-                                        <?=$value['avatar'] ?>
                                     </td>
                                     <td>
                                         <?= $value['price'] ?>

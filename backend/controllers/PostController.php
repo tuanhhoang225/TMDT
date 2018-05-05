@@ -66,7 +66,7 @@ class PostController extends AdminController
         $model = new Post();
 
         if ($model->load(Yii::$app->request->post())) {
-
+            $model->date = Yii::$app->formatter->asDate('now', 'php:Y-m-d') ;
             $model->images = UploadedFile::getInstances($model, 'images');
 
             if ($name = $model->upload()) {

@@ -54,8 +54,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <th>STT</th>
                                 <th>Title</th>
                                 <th>Describe</th>
-                                <th>Sequence</th>
-                                <th>Status</th>
                                 <th>Released</th>
                                 <th>Action</th>
                             </tr>
@@ -72,18 +70,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </td>
                                     <td>
                                         <?= $value['describe'] ?>
-                                    </td>
-                                    <td>
-                                        <?= $value['sequence'] ?>
-                                    </td>
-                                    <td>
-                                        <div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini"
-                                             style="border:none">
-                                            <input data-id="<?= $value['id'] ?>" data-action="ajax/status"
-                                                   data-table="category"
-                                                   type="checkbox" <?= $value['status'] ? 'checked="checked"' : '' ?>
-                                                   title="" name="switch-checkbox">
-                                        </div>
                                     </td>
                                     <td>
                                         <div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini"

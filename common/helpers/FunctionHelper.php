@@ -17,6 +17,8 @@ use yii\web\BadRequestHttpException;
 use fproject\components\DbHelper;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use common\models\Order;
+use common\models\Shipping;
+
 class FunctionHelper
 {
     /**
@@ -286,5 +288,9 @@ class FunctionHelper
     {
         $order = Order::find()->where(['=', 'user_id', $id_customer])->all();
         return count($order);
+    }
+    public static function get_shipping_by_province($province_id){
+        $ship = Shipping::findOne($province_id);
+        return $ship->cost;
     }
 }
