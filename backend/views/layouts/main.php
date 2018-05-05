@@ -133,6 +133,14 @@ AdminAsset::register($this);
                         </span>
                     </a>
                 </li>
+                <li>
+                    <a href="<?= Url::to(['customer/index']) ?>">
+                        <i class="fa fa-address-card-o"></i>
+                        <span>Quản lý khách hàng</span>
+                        <span class="pull-right-container">
+                        </span>
+                    </a>
+                </li>
                 <?php if ($user['permission'] == User::RULE_SENIOR): ?>
                 <li class="treeview">
                     <a href="#">

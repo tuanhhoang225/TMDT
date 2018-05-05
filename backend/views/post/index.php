@@ -4,9 +4,10 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use common\models\Category;
+use yii\widgets\LinkPager;
 /* @var $this yii\web\View */
 /* @var $posts common\models\Post */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $pages \yii\data\Pagination */
 
 $this->title = Yii::t('app', 'Posts');
 $this->params['breadcrumbs'][] = $this->title;
@@ -67,7 +68,9 @@ function findCategory($category_id){
                             <?php foreach ($posts as $key => $value): ?>
                                 <tr>
                                     <td>
-                                        <?= $key + 1 ?>
+                                        <?php if (isset($_GET['page'])):?>
+                                            <?= $pages->defaultPageSize * ($_GET['page'] - 1) + $key + 1; ?>
+                                        <?php endif; ?>
                                     </td>
                                     <td>
                                         <?= findCategory($value['category_id'])['title'] ?>
@@ -105,6 +108,17 @@ function findCategory($category_id){
                             <?php endforeach; ?>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding: 0 15px!important;margin-bottom: 20px;">
+            <div class="col-md-12">
+                <div class="product-pagination text-center">
+                    <div class="header-subject">
+                        <?php
+                        echo LinkPager::widget(['pagination' => $pages]);
+                        ?>
                     </div>
                 </div>
             </div>

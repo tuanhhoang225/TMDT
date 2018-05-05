@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use backend\controllers\base\AdminController;
+use  yii\data\Pagination;
 /**
  * ProductController implements the CRUD actions for Product model.
  */
@@ -36,9 +37,17 @@ class ProductController extends AdminController
      */
     public function actionIndex()
     {
-        $products = Product::find()->all();
+        $query = Product::find();
+        $pagination = new Pagination([
+            'defaultPageSize' => 10,
+            'totalCount' => $query->count(),
+        ]);
+
+        $products = $query->offset($pagination->offset)->limit($pagination->limit)
+            ->orderBy('id DESC')->all();
         return $this->render('index', [
             'products' => $products,
+            'pages'=>$pagination
         ]);
     }
 

@@ -11,6 +11,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use backend\controllers\base\AdminController;
+use yii\data\Pagination;
 /**
  * PostController implements the CRUD actions for Post model.
  */
@@ -37,9 +38,16 @@ class PostController extends AdminController
      */
     public function actionIndex()
     {
-       $posts = Post::find()->all();
+        $query = Post::find();
+       $pagination = new Pagination([
+           'defaultPageSize' => 10,
+           'totalCount' => $query->count(),
+       ]);
+        $posts = $query->offset($pagination->offset)->limit($pagination->limit)
+            ->orderBy('id DESC')->all();
         return $this->render('index', [
             'posts'=>$posts,
+            'pages'=> $pagination
         ]);
     }
 

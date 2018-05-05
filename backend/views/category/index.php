@@ -1,15 +1,15 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
-use yii\widgets\Pjax;
 use yii\helpers\Url;
+use yii\widgets\LinkPager;
 /* @var $this yii\web\View */
 /* @var $categorys common\models\Category */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $pages \yii\data\Pagination */
 
 $this->title = Yii::t('app', 'Categories');
 $this->params['breadcrumbs'][] = $this->title;
+var_dump($pages); die;
 ?>
 <div class="category-index">
 
@@ -63,7 +63,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <tr>
 
                                     <td>
-                                        <?= $key + 1 ?>
+                                        <?php if (isset($_GET['page'])):?>
+                                            <?= $pages->defaultPageSize * ($_GET['page'] - 1) + $key + 1; ?>
+                                        <?php endif; ?>
                                     </td>
                                     <td>
                                         <?= $value['title'] ?>
@@ -95,6 +97,17 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?php endforeach; ?>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding: 0 15px!important;margin-bottom: 20px;">
+            <div class="col-md-12">
+                <div class="product-pagination text-center">
+                    <div class="header-subject">
+                        <?php
+                        echo LinkPager::widget(['pagination' => $pages]);
+                        ?>
                     </div>
                 </div>
             </div>

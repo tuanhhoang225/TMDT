@@ -8,11 +8,11 @@ use common\models\Product;
 use common\helpers\FunctionHelper;
 use common\models\District;
 use common\models\Province;
-
+use yii\widgets\LinkPager;
 /* @var $this yii\web\View */
 /* @var $order common\models\Order */
 /* @var $orderdetail common\models\OrderDetail */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $pages \yii\data\Pagination */
 
 $this->title = Yii::t('app', 'Đặt hàng');
 $this->params['breadcrumbs'][] = $this->title;
@@ -99,7 +99,9 @@ function tong($a, $b){
                             as $key => $value): ?>
                             <tr>
                                 <td>
-                                    <?= $key + 1 ?>
+                                    <?php if (isset($_GET['page'])):?>
+                                        <?= $pages->defaultPageSize * ($_GET['page'] - 1) + $key + 1; ?>
+                                    <?php endif; ?>
                                 </td>
                                 <td>
                                     <a data-toggle="modal" data-target="#chitiet">Chi Tiết
@@ -193,6 +195,17 @@ function tong($a, $b){
                             <?php endforeach; ?>
                         </table>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding: 0 15px!important;margin-bottom: 20px;">
+            <div class="col-md-12">
+                <div class="product-pagination text-center">
+                    <div class="header-subject">
+                        <?php
+                        echo LinkPager::widget(['pagination' => $pages]);
+                        ?>
                     </div>
                 </div>
             </div>
