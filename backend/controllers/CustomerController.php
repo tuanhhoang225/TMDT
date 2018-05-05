@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\data\Pagination;
 /**
  * CustomerController implements the CRUD actions for User model.
  */
@@ -35,7 +35,13 @@ class CustomerController extends Controller
      */
     public function actionIndex()
     {
-        $customers = User::find()->where(['=','permission','RULE_USER'])->all();
+        $query = User::find()->where(['=','permission','RULE_USER']);
+        $pagination = new Pagination([
+            'defaultPageSize' => 10,
+            'totalCount' => $query->count(),
+        ]);
+        $customers = $query->offset($pagination->offset)->limit($pagination->limit)
+            ->orderBy('id DESC')->all();
         return $this->render('index', [
             'customers' => $customers,
         ]);

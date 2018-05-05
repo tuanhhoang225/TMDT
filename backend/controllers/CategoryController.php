@@ -9,7 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\helpers\FunctionHelper;
-
+use yii\data\Pagination;
 /**
  * CategoryController implements the CRUD actions for Category model.
  */
@@ -36,9 +36,17 @@ class CategoryController extends Controller
      */
     public function actionIndex()
     {
-        $categorys = Category::find()->all();
+        $query = Category::find();
+        $pagination = new Pagination([
+            'defaultPageSize' => 10,
+            'totalCount' => $query->count(),
+        ]);
+
+        $categorys = $query->offset($pagination->offset)->limit($pagination->limit)
+            ->orderBy('id DESC')->all();
         return $this->render('index', [
-            'categorys'=>$categorys,
+            'categorys' => $categorys,
+            'pages'=>$pagination
         ]);
     }
 

@@ -9,7 +9,7 @@ use common\models\base\OrderSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\data\Pagination;
 /**
  * OrderController implements the CRUD actions for Order model.
  */
@@ -36,9 +36,16 @@ class OrderController extends Controller
      */
     public function actionIndex()
     {
-        $order = Order::find()->all();
+        $query = Order::find();
+        $pagination = new Pagination([
+            'defaultPageSize' => 10,
+            'totalCount' => $query->count(),
+        ]);
+        $order = $query->offset($pagination->offset)->limit($pagination->limit)
+            ->orderBy('id DESC')->all();
         return $this->render('index',[
             'order'=> $order,
+            'pages'=>$pagination
         ]);
     }
 

@@ -1,20 +1,23 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
 use yii\helpers\Url;
+use yii\widgets\LinkPager;
+
 /* @var $this yii\web\View */
 /* @var $products common\models\Product */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $pages \yii\data\Pagination */
 
 $this->title = Yii::t('app', 'Products');
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="product-index">
 
     <section class="content-header">
         <h1>
-            Product        <small></small>
+            Product
+            <small></small>
         </h1>
     </section>
 
@@ -27,7 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="pull-right">
                             <div class="btn-group pull-right" style="margin-right: 10px">
                                 <a class="btn btn-sm btn-twitter"><i class="fa fa-download"></i> Export</a>
-                                <button type="button" class="btn btn-sm btn-twitter dropdown-toggle" data-toggle="dropdown">
+                                <button type="button" class="btn btn-sm btn-twitter dropdown-toggle"
+                                        data-toggle="dropdown">
                                     <span class="caret"></span>
                                     <span class="sr-only">Toggle Dropdown</span>
                                 </button>
@@ -48,7 +52,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         <table class="table table-hover">
                             <thead>
                             <tr>
-
                                 <th>STT</th>
                                 <th>Title</th>
                                 <th>Price</th>
@@ -59,14 +62,15 @@ $this->params['breadcrumbs'][] = $this->title;
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($products as $key => $value ): ?>
+                            <?php foreach ($products as $key => $value): ?>
                                 <tr>
-
                                     <td>
-                                        <?= $key +1 ?>
+                                        <?php if (isset($_GET['page'])):?>
+                                            <?= $pages->defaultPageSize * ($_GET['page'] - 1) + $key + 1; ?>
+                                        <?php endif; ?>
                                     </td>
                                     <td>
-                                        <?=$value['title'] ?>
+                                        <?= $value['title'] ?>
                                     </td>
                                     <td>
                                         <?= $value['price'] ?>
@@ -78,7 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <?= $value['content'] ?>
                                     </td>
                                     <td>
-                                        <?= $value['sale']?>
+                                        <?= $value['sale'] ?>
                                     </td>
                                     <td>
                                         <a href="<?= Url::to(['product/update', 'id' => $value['id']]) ?>">
@@ -93,10 +97,23 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </td>
 
                                 </tr>
-                            <?php endforeach;?>
+                            <?php endforeach; ?>
                             </tbody>
                         </table>
 
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding: 0 15px!important;margin-bottom: 20px;">
+            <div class="col-md-12">
+                <div class="product-pagination text-center">
+                    <div class="header-subject">
+                        <?php
+                        echo LinkPager::widget(['pagination' => $pages]);
+                        ?>
                     </div>
                 </div>
             </div>

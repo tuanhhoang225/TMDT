@@ -27,8 +27,9 @@ use yii\widgets\ActiveForm;
                         <?= $form->field($model, 'describe')->textInput(['maxlength' => true]) ?>
                     </div>
                     <div class="form-group">
-                        <?= $form->field($model, 'status')->checkbox(['class' => 'minimal none-action'])->label(false) ?>
+                        <?= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
                     </div>
+
                     <div class="form-group">
                         <?= $form->field($model, 'released')->checkbox(['class' => 'minimal none-action'])->label(false) ?>
                     </div>
