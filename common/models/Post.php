@@ -20,7 +20,7 @@ class Post extends base\Post
     public function rules()
     {
 
-        return array_merge(parent::rules(), [[['images'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'maxFiles' => 4]]);
+        return array_merge(parent::rules(), [[['images'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'maxFiles' => 4]]);
     }
 
     /**

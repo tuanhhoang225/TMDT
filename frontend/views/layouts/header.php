@@ -127,13 +127,13 @@ use common\helpers\FunctionHelper;
         </script>
 
         <div class="search header_bar_item" id="search">
-            <form data-realtime-path="/realtime_search" action="https://www.lixibox.com/search" accept-charset="UTF-8"
+            <form data-realtime-path="" action="" accept-charset="UTF-8"
                   method="get"><input name="utf8" type="hidden" value="✓">
                 <div class="search_text">
                     <div class="typeahead_all search_type_all">
-                        <input type="text" name="q" id="q" placeholder="Tìm kiếm..."
+                        <input type="text" name="q" id="autosearch" placeholder="Tìm kiếm..."
                                class="query form-control search-realtime-input" autocomplete="off"
-                               data-path="/suggestion_search">
+                               >
                         <div id="search-results-realtime"></div>
                     </div>
                 </div>

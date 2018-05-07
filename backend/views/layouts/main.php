@@ -141,6 +141,14 @@ AdminAsset::register($this);
                         </span>
                     </a>
                 </li>
+                <li>
+                    <a href="<?= Url::to(['setting/index']) ?>">
+                        <i class="fa fa-asterisk"></i>
+                        <span>Quản lý cấu hình</span>
+                        <span class="pull-right-container">
+                        </span>
+                    </a>
+                </li>
                 <?php if ($user['permission'] == User::RULE_SENIOR): ?>
                 <li class="treeview">
                     <a href="#">

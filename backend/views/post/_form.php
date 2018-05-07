@@ -43,6 +43,7 @@ use common\models\Category;
                         </div>
                     </div>
                     <div class="form-group">
+                        <img src="<?= $model['avatar'] ?>" style="width: 200px;" alt="">
                         <?= $form->field($model, 'images[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
                     </div>
                     <div class="form-group">

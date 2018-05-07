@@ -2,12 +2,15 @@
 
 namespace backend\controllers;
 
+use function Sodium\add;
 use Yii;
 use common\models\Setting;
 use common\models\base\SettingSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+use common\helpers\FunctionHelper;
 
 /**
  * SettingController implements the CRUD actions for Setting model.
@@ -37,7 +40,7 @@ class SettingController extends Controller
     {
         $settings = Setting::find()->all();
         return $this->render('index', [
-            'settings'=>$settings
+            'settings' => $settings
         ]);
     }
 
@@ -63,8 +66,19 @@ class SettingController extends Controller
     {
         $model = new Setting();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->photos = UploadedFile::getInstances($model, 'photos');
+            if ($name = $model->upload()) {
+                if ($name) {
+                    $model->images = json_encode($name);
+                    $model->avatar =$name[0];
+                }
+            }
+            if ($model->save()) {
+                $model->slug = FunctionHelper::changeTitle($model->title) . "-" . $model->id;
+                $model->save();
+                return $this->redirect(['index']);
+            }
         }
 
         return $this->render('create', [
@@ -84,7 +98,7 @@ class SettingController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
