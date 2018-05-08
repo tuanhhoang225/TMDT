@@ -2,10 +2,14 @@
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
+
 /* @var $model \frontend\models\SignupForm */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use common\models\Province;
+use common\models\District;
+use yii\helpers\ArrayHelper;
 
 $this->title = 'Signup';
 $this->params['breadcrumbs'][] = $this->title;
@@ -36,6 +40,39 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="form-group">
                     <label for="user_password">Mật khẩu</label>
                     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true])->label(false) ?>
+                </div>
+                <div class="form-group">
+                    <?= $form->field($model, 'phone')->textInput(['maxlength' => true])->label(Yii::t('app', 'SĐT')) ?>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <?= $form->field($model, 'province_id')->dropDownList(
+                            ArrayHelper::map(Province::find()->all(), 'id', 'ten'),
+                            [
+                                'prompt' => '- ' . Yii::t('app', 'Chọn tỉnh') . ' -',
+                                'onchange' => '$.post( "' . Yii::$app->urlManager->createUrl('ajax/get-district-by-province-id?province_id=') . '"+$(this).val(), function( data ) {
+                                      $( "select#district" ).html(data);
+                                });'
+                            ]
+                        )->label(Yii::t('app', 'Tỉnh')) ?>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <?= $form->field($model, 'district_id')->dropDownList(
+                            ArrayHelper::map(District::find()->where(['=', 'id_tinh', $model->province_id])->all(), 'id', 'ten'),
+                            [
+                                'prompt' => Yii::t('app', '--Chọn huyện--'),
+                                'id' => 'district'
+                            ]
+                        )->label(Yii::t('app', 'Huyện')) ?>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <?= $form->field($model, 'address')->textInput(['maxlength' => true])->label(Yii::t('app', 'Địa chỉ')) ?>
+                    </div>
                 </div>
                 <div class="checkbox" style="width:150px">
                     <label>

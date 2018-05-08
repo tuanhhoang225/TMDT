@@ -8,7 +8,7 @@
 
 namespace frontend\controllers;
 
-
+use common\models\District;
 use common\models\Product;
 use Yii;
 use yii\web\Controller;
@@ -39,6 +39,17 @@ class AjaxController extends Controller
         }
         return false;
 
+    }
+    public function actionGetDistrictByProvinceId($province_id)
+    {
+        $districts = District::find()
+            ->where(['id_tinh' => $province_id])
+            ->orderBy('id DESC')
+            ->all();
+        echo "<option value=''>" . Yii::t('app', '-- Chọn Huyện --') . "</option>";
+        foreach ($districts as $key => $value):
+            echo "<option value=" . $value['id'] . ">" . $value['ten'] . "</option>";
+        endforeach;
     }
 
 }

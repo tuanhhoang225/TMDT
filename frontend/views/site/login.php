@@ -19,11 +19,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <h2>Đăng nhập</h2>
 
             <div class="or top-20 text-center">
-                Đăng nhập bằng email và mật khẩu
+                Đăng nhập bằng username và mật khẩu
             </div>
             <div class="top-20">
                 <div class="form-group">
-                    <label for="user_email">Email</label>
+                    <label for="user_email">Username</label>
                     <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'autofocus' => 'autofocus'])->label(false) ?>
                 </div>
                 <div class="form-group">
