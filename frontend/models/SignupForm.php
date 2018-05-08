@@ -3,6 +3,7 @@ namespace frontend\models;
 
 use yii\base\Model;
 use common\models\User;
+use Yii;
 
 /**
  * Signup form
@@ -11,6 +12,7 @@ class SignupForm extends Model
 {
     public $username;
     public $email;
+    public $rememberMe = true;
     public $password;
 
 
@@ -33,6 +35,15 @@ class SignupForm extends Model
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+
+            ['rememberMe', 'boolean'],
+        ];
+    }
+    public function attributeLabels()
+    {
+        return [
+            'username' => Yii::t('app', 'Email'),
+            'password' => Yii::t('app', 'Mật khẩu'),
         ];
     }
 

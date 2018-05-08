@@ -6,8 +6,25 @@
  * Time: 9:33 AM
  */
 
-use yii\helpers\Url;
+use yii\web\NotFoundHttpException;
+use common\models\User;
+use  yii\helpers\Url;
 use common\helpers\FunctionHelper;
+
+$user = null;
+
+if (!Yii::$app->user->isGuest) {
+    $user = findModel(Yii::$app->user->identity->getId());
+}
+
+function findModel($id)
+{
+    if (($model = User::findOne($id)) !== null) {
+        return $model;
+    } else {
+        throw new NotFoundHttpException('The requested page does not exist . ');
+    }
+}
 
 ?>
 
@@ -102,9 +119,6 @@ use common\helpers\FunctionHelper;
 </div>
 
 
-
-
-
         </script>
         <script id="searchNotFound" type="text/x-jsrender">
 <div class='box_card_container'>
@@ -113,9 +127,6 @@ use common\helpers\FunctionHelper;
 <p>Không có kểt quả nào phù hợp.</p>
 </div>
 </div>
-
-
-
 
 
         </script>
@@ -128,9 +139,6 @@ use common\helpers\FunctionHelper;
 </div>
 {{/if}}
 </div>
-
-
-
 
 
         </script>
@@ -164,15 +172,25 @@ use common\helpers\FunctionHelper;
                     </div>
                 </div>
                 <button class="search_submit btn lx-btn-primary">
-                    <i class="fa fa-search" id="icon-search"></i>
-                    <i style="display: none" class="fa fa-spinner fa-pulse" id="icon-search-1"></i>
+                    <i class="fa fa-search"></i>
+                    <i style="display: none" class="fa fa-spinner fa-pulse"></i>
                 </button>
             </form>
 
         </div>
         <div class="auth" id="notification_box">
             <div class="header_bar_item" id="new_account">
-                <a class="btn lx-btn-outline" href="">Sign in / Sign up</a>
+                <?php if (Yii::$app->user->isGuest): ?>
+                    <a class="btn lx-btn-outline" href="../site/login" >
+                        Sign in / Sign up
+                    </a>
+                <?php endif; ?>
+                <?php if (!Yii::$app->user->isGuest): ?>
+                    <a class="btn lx-btn-outline" href="" data-toggle="modal" data-target="#new_user">
+                        <i class="fa fa-user"></i>
+                        <?= $user['username'] ?>
+                    </a>
+                <?php endif; ?>
             </div>
 
         </div>
