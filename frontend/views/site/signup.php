@@ -11,24 +11,47 @@ $this->title = 'Signup';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>Please fill out the following fields to signup:</p>
-
     <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
-
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-                <?= $form->field($model, 'email') ?>
-
-                <?= $form->field($model, 'password')->passwordInput() ?>
-
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <?php $form = ActiveForm::begin(); ?>
+            <h2>Đăng ký</h2>
+            <div class="top-20">
+                <a class="btn btn-block facebook-btn" href="">
+                    <i class="fa fa-facebook"></i>
+                    Đăng nhập bằng Facebook
+                </a>
+            </div>
+            <div class="or top-20 text-center">
+                hoặc đăng nhập bằng email và mật khẩu
+            </div>
+            <div class="top-20">
                 <div class="form-group">
-                    <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                    <label for="user_name">Họ Tên</label>
+                    <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'autofocus' => 'autofocus'])->label(false) ?>
                 </div>
-
+                <div class="form-group">
+                    <label for="user_email">Email</label>
+                    <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'autofocus' => 'autofocus'])->label(false) ?>
+                </div>
+                <div class="form-group">
+                    <label for="user_password">Mật khẩu</label>
+                    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true])->label(false) ?>
+                </div>
+                <div class="checkbox" style="width:150px">
+                    <label>
+                        <?= $form->field($model, 'rememberMe')->checkbox()->label('Nhớ đăng nhập') ?>
+                    </label>
+                </div>
+                <div class="clearfix"></div>
+                <div class="top10">
+                    <input type="submit" name="commit" value="Đăng ký" class="btn btn-block signin-btn">
+                </div>
+                <div class="register">
+                    Đã có tài khoản
+                    <a href="login">Đăng nhập</a>
+                </div>
+            </div>
             <?php ActiveForm::end(); ?>
         </div>
     </div>

@@ -6,8 +6,25 @@
  * Time: 9:33 AM
  */
 
-use yii\helpers\Url;
+use yii\web\NotFoundHttpException;
+use common\models\User;
+use  yii\helpers\Url;
 use common\helpers\FunctionHelper;
+
+$user = null;
+
+if (!Yii::$app->user->isGuest) {
+    $user = findModel(Yii::$app->user->identity->getId());
+}
+
+function findModel($id)
+{
+    if (($model = User::findOne($id)) !== null) {
+        return $model;
+    } else {
+        throw new NotFoundHttpException('The requested page does not exist . ');
+    }
+}
 
 ?>
 
@@ -102,6 +119,8 @@ use common\helpers\FunctionHelper;
 </div>
 
 
+
+
         </script>
         <script id="searchNotFound" type="text/x-jsrender">
 <div class='box_card_container'>
@@ -110,6 +129,8 @@ use common\helpers\FunctionHelper;
 <p>Không có kểt quả nào phù hợp.</p>
 </div>
 </div>
+
+
 
 
         </script>
@@ -124,6 +145,8 @@ use common\helpers\FunctionHelper;
 </div>
 
 
+
+
         </script>
 
         <div class="search header_bar_item" id="search">
@@ -133,7 +156,7 @@ use common\helpers\FunctionHelper;
                     <div class="typeahead_all search_type_all">
                         <input type="text" name="q" id="autosearch" placeholder="Tìm kiếm..."
                                class="query form-control search-realtime-input" autocomplete="off"
-                               >
+                        >
                         <div id="search-results-realtime"></div>
                     </div>
                 </div>
@@ -146,9 +169,18 @@ use common\helpers\FunctionHelper;
         </div>
         <div class="auth" id="notification_box">
             <div class="header_bar_item" id="new_account">
-                <a class="btn lx-btn-outline" href="">Sign in / Sign up</a>
+                <?php if (Yii::$app->user->isGuest): ?>
+                    <a class="btn lx-btn-outline" href="../site/login" >
+                        Sign in / Sign up
+                    </a>
+                <?php endif; ?>
+                <?php if (!Yii::$app->user->isGuest): ?>
+                    <a class="btn lx-btn-outline" href="" data-toggle="modal" data-target="#new_user">
+                        <i class="fa fa-user"></i>
+                        <?= $user['username'] ?>
+                    </a>
+                <?php endif; ?>
             </div>
-
         </div>
     </div>
 
@@ -158,41 +190,42 @@ use common\helpers\FunctionHelper;
         <div class="clearfix" id="navigation">
             <div class="logo">
                 <a href="">
-                    <img width="24" height="24" alt="Lixibox Logo" src="/lixibox/images/logo_round-2a67b0e71e07b3b6675de9bda2cd327dfae0c73a41b7103fe72eb71b84cf9add.png">
+                    <img width="24" height="24" alt="Lixibox Logo"
+                         src="/lixibox/images/logo_round-2a67b0e71e07b3b6675de9bda2cd327dfae0c73a41b7103fe72eb71b84cf9add.png">
                 </a>
             </div>
             <ul id="desktop_browse_node_navigations">
                 <?php foreach (FunctionHelper::get_categories_by_parent_id() as $key => $value): ?>
                     <?php $children = FunctionHelper::get_categories_by_parent_id($value['id']); ?>
-                        <?php if (!$children): ?>
-                            <li class="top_layer_navigation sale-tag">
-                                <a href=""><?=$value['title']?></a>
-                            </li>
-                        <?php endif;?>
-                        <?php if ($children): ?>
-                            <li class="top_layer_navigation dropdown">
-                                <div class="dropdown-toggle" data-toggle="dropdown" type="hover">
-                                    <a href=""><?=$value['title']?>
-                                        <i class="fa fa-angle-down"></i>
-                                    </a>
-                                </div>
-                                <div class="dropdown-menu">
-                                    <?php foreach (FunctionHelper::get_categories_by_parent_id($value['id']) as $keychil => $valuechil): ?>
+                    <?php if (!$children): ?>
+                        <li class="top_layer_navigation sale-tag">
+                            <a href=""><?= $value['title'] ?></a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if ($children): ?>
+                        <li class="top_layer_navigation dropdown">
+                            <div class="dropdown-toggle" data-toggle="dropdown" type="hover">
+                                <a href=""><?= $value['title'] ?>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div class="dropdown-menu">
+                                <?php foreach (FunctionHelper::get_categories_by_parent_id($value['id']) as $keychil => $valuechil): ?>
                                     <div class="inner beauty_boxes">
                                         <div class="node">
                                             <a href="">
-                                                <div class="name"><?=$valuechil['title']?>
+                                                <div class="name"><?= $valuechil['title'] ?>
                                                 </div>
-                                                <div class="description"><?=$valuechil['describe']?>
+                                                <div class="description"><?= $valuechil['describe'] ?>
                                                 </div>
                                             </a>
                                         </div>
                                     </div>
-                                    <?php endforeach;?>
-                                </div>
-                            </li>
-                        <?php endif;?>
-                <?php endforeach;?>
+                                <?php endforeach; ?>
+                            </div>
+                        </li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
                 <li class="top_layer_navigation pull-right" id="desktop_cart">
                     <div class="dropdown-hover">
                         <div class="header_bar_item cart-icon">
