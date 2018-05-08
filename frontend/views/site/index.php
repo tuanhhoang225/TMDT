@@ -71,6 +71,7 @@ $this->title = 'Beauty Shop';
                                                                     <input type="hidden" name="box_id" id="box_id"
                                                                            value="5963">
                                                                     <input type="submit" name="commit"
+                                                                           class="btnAddAction"
                                                                            value="Add to cart"
                                                                            style="display: none;"
                                                                            data-disable-with="Sending">
@@ -78,7 +79,6 @@ $this->title = 'Beauty Shop';
                                                                         <i class="fa fa-shopping-cart"></i>
                                                                     </div>
                                                                 </form>
-
                                                             </div>
                                                             <a class="box_name"
                                                                href="<?= Url::to(['site/view', 'category_slug' => $value['category']['slug'], 'content_slug' => $value['slug']]) ?>"><b><?= $value['title'] ?></b></a>
@@ -227,16 +227,15 @@ $this->title = 'Beauty Shop';
                 </h3>
                 <div class="wrapper">
                     <div class="row top-30">
-                        <?php foreach (FunctionHelper::get_product() as $key => $value): ?>
-                            <?php if ($value['category_id'] == 4): ?>
+                        <?php  $setting = FunctionHelper::get_setting_by_key("sang-lap") ?>
+                            <?php foreach (json_decode($setting['images']) as $key => $value): ?>
                                 <div class="item_expert col-xs-4 col-sm-2 col-md-2 bottom-20 l-padding-left-3 l-padding-right-3">
                                     <a title="" href="">
                                         <img alt="" class="lazyload img-responsive"
-                                             src="<?= $value['avatar'] ?>">
-                                        <span class="expert_name"><?= $value['title'] ?></span>
+                                             src="<?= $value ?>">
+                                        <span class="expert_name"></span>
                                     </a>
                                 </div>
-                            <?php endif; ?>
                         <?php endforeach; ?>
                         <div class="visible-xs top-10">
                             <a class="btn btn-default" id="more-experts" href="javascript:{}">Xem thêm chuyên gia</a>

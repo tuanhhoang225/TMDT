@@ -95,6 +95,18 @@ class SiteController extends Controller
             case'post-page':
                 $page =($category_slug && !$post)?'post-page':'detail-post-page';
                 break;
+            case 'sale-page':
+                $page =  'sale-page';
+                break;
+            case 'makeup-page':
+                $page =  'makeup-page';
+                break;
+            case 'hair-page':
+                $page =  'hair-page';
+                break;
+            case 'trademark-page':
+                $page =  'trademark-page';
+                break;
             default;
                 break;
         }

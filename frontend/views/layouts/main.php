@@ -26,15 +26,9 @@ ParksAsset::register($this);
 </head>
 <body class="no-touch not-mobile" data-action="index" data-controller="shoppings" style="">
 <?php $this->beginBody() ?>
-
-
 <?= $this->render('header') ?>
-
-
-
 <?= $content ?>
 <?= $this->render('footer') ?>
-
 <script>
     var frontend = "<?= Yii::$app->getHomeUrl() ?>";
     console.log(frontend);

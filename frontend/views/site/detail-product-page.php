@@ -100,10 +100,6 @@ use common\helpers\FunctionHelper;
                         <img alt="Hot Fun In The Summertime" src="<?=$product['avatar']?>">
                     </div>
                 </div>
-
-                <!-- Nav tabs -->
-                <!-- LÀM BÌNH LUẬN FB Ở ĐÂY -->
-                <!-- Tab panes -->
             </div>
         </div>
     </div>
@@ -338,3 +334,4 @@ use common\helpers\FunctionHelper;
         }, 300);
     </script>
 </div>
+

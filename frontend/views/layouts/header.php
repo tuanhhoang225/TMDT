@@ -172,7 +172,7 @@ use common\helpers\FunctionHelper;
                         <?php if ($children): ?>
                             <li class="top_layer_navigation dropdown">
                                 <div class="dropdown-toggle" data-toggle="dropdown" type="hover">
-                                    <a href=""><?=$value['title']?>
+                                    <a href="<?= Url::to(['site/view','category_slug' => $value['slug']]) ?>"><?=$value['title']?>
                                         <i class="fa fa-angle-down"></i>
                                     </a>
                                 </div>
@@ -196,7 +196,7 @@ use common\helpers\FunctionHelper;
                 <li class="top_layer_navigation pull-right" id="desktop_cart">
                     <div class="dropdown-hover">
                         <div class="header_bar_item cart-icon">
-                            <a href="https://www.lixibox.com/cart"><i class="fa fa-shopping-bag"></i>
+                            <a href=""><i class="fa fa-shopping-bag"></i>
                                 <span>Giỏ hàng</span>
                             </a>
                         </div>
@@ -206,7 +206,7 @@ use common\helpers\FunctionHelper;
                     </div>
                 </li>
                 <li class="top_layer_navigation pull-right wishlist-navigation">
-                    <a href="https://www.lixibox.com/user/wishlist">
+                    <a href="">
                         <span class="icon-wishlist">
                             <i class="fa fa-heart"></i>
                         </span>
