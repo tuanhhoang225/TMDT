@@ -166,7 +166,7 @@ use common\helpers\FunctionHelper;
                     <?php $children = FunctionHelper::get_categories_by_parent_id($value['id']); ?>
                         <?php if (!$children): ?>
                             <li class="top_layer_navigation sale-tag">
-                                <a href=""><?=$value['title']?></a>
+                                <a href="<?= Url::to(['site/view','category_slug' => $value['slug']]) ?>"><?=$value['title']?></a>
                             </li>
                         <?php endif;?>
                         <?php if ($children): ?>
