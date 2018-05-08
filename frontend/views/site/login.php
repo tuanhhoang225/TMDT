@@ -17,14 +17,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-4">
             <?php $form = ActiveForm::begin(); ?>
             <h2>Đăng nhập</h2>
-            <div class="top-20">
-                <a class="btn btn-block facebook-btn" href="">
-                    <i class="fa fa-facebook"></i>
-                    Đăng nhập bằng Facebook
-                </a>
-            </div>
+
             <div class="or top-20 text-center">
-                hoặc đăng nhập bằng email và mật khẩu
+                Đăng nhập bằng email và mật khẩu
             </div>
             <div class="top-20">
                 <div class="form-group">

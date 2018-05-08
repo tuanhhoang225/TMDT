@@ -13,6 +13,7 @@ use common\models\Image;
 use common\models\OrderDetail;
 use common\models\Post;
 use common\models\Product;
+use common\models\Setting;
 use yii\web\BadRequestHttpException;
 use fproject\components\DbHelper;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -49,7 +50,7 @@ class FunctionHelper
     // Lấy dữ liệu category con
     public static function get_categories_by_parent_id($parent_id = null, $limit = null)
     {
-        $query = Category::find()->where(['=', 'status', 1]);
+        $query = Category::find()->where(['=', 'released', 1]);
 
         if ($parent_id) {
             $query->andWhere(['=', 'parent_id', $parent_id]);
@@ -80,6 +81,15 @@ class FunctionHelper
             ->joinWith('products')
             ->where(['category.slug' => $slug])->asArray()->one();
     }
+
+
+    public static function get_setting_by_key($key)
+    {
+        return Setting::find()
+            ->where(['key' => $key])->asArray()->one();
+    }
+
+
     public static function get_post_by_slug($slug)
     {
         return Post::find()

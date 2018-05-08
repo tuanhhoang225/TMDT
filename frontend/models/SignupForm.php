@@ -10,10 +10,22 @@ use Yii;
  */
 class SignupForm extends Model
 {
+
+    public $id;
     public $username;
+    public $full_name;
     public $email;
-    public $rememberMe = true;
+    public $avatar;
+    public $permission;
+    public $address;
     public $password;
+    public $status;
+    public $re_password;
+    public $phone;
+    public $province_id;
+    public $district_id;
+    public $rememberMe = true;
+
 
 
     /**
@@ -24,17 +36,27 @@ class SignupForm extends Model
         return [
             ['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => '\common\models\base\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
             ['email', 'required'],
-            ['email', 'email'],
-            ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\base\User', 'message' => 'This username has already been taken.'],
+            ['email', 'string', 'min' => 2, 'max' => 255],
+
+            [['full_name', 'avatar', 'email'], 'trim'],
+            ['full_name', 'required'],
+            [['full_name', 'avatar', 'email'], 'string'],
+            [['full_name', 'avatar', 'email'], 'string', 'max' => 255],
+
+            [['permission', 'address','phone','avatar'], 'string'],
+
+            [['province_id', 'district_id'], 'integer'],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+
+            ['re_password', 'compare', 'compareAttribute' => 'password'],
 
             ['rememberMe', 'boolean'],
         ];
@@ -60,6 +82,7 @@ class SignupForm extends Model
         
         $user = new User();
         $user->username = $this->username;
+        $user['full_name'] = $this->full_name;
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();

@@ -119,6 +119,7 @@ function findModel($id)
 </div>
 
 
+
         </script>
         <script id="searchNotFound" type="text/x-jsrender">
 <div class='box_card_container'>
@@ -127,6 +128,7 @@ function findModel($id)
 <p>Không có kểt quả nào phù hợp.</p>
 </div>
 </div>
+
 
 
         </script>
@@ -139,6 +141,7 @@ function findModel($id)
 </div>
 {{/if}}
 </div>
+
 
 
         </script>
@@ -181,7 +184,7 @@ function findModel($id)
         <div class="auth" id="notification_box">
             <div class="header_bar_item" id="new_account">
                 <?php if (Yii::$app->user->isGuest): ?>
-                    <a class="btn lx-btn-outline" href="../site/login" >
+                    <a class="btn lx-btn-outline" href="../site/login">
                         Sign in / Sign up
                     </a>
                 <?php endif; ?>
@@ -189,6 +192,10 @@ function findModel($id)
                     <a class="btn lx-btn-outline" href="" data-toggle="modal" data-target="#new_user">
                         <i class="fa fa-user"></i>
                         <?= $user['username'] ?>
+                    </a>
+                    <a class="btn lx-btn-outline" href="../site/logout">
+                        <i class="fa fa-user"></i>
+                        Logout
                     </a>
                 <?php endif; ?>
             </div>
@@ -209,6 +216,7 @@ function findModel($id)
             <ul id="desktop_browse_node_navigations">
                 <?php foreach (FunctionHelper::get_categories_by_parent_id() as $key => $value): ?>
                     <?php $children = FunctionHelper::get_categories_by_parent_id($value['id']); ?>
+
                     <?php if (!$children): ?>
                         <li class="top_layer_navigation sale-tag">
                             <a href=""><?= $value['title'] ?></a>
@@ -222,13 +230,13 @@ function findModel($id)
                                 </a>
                             </div>
                             <div class="dropdown-menu">
-                                <?php foreach (FunctionHelper::get_categories_by_parent_id($value['id']) as $keychil => $valuechil): ?>
+                                <?php foreach (FunctionHelper::get_categories_by_parent_id($value['id']) as $keychil1 => $valuechil1): ?>
                                     <div class="inner beauty_boxes">
                                         <div class="node">
                                             <a href="">
-                                                <div class="name"><?= $valuechil['title'] ?>
+                                                <div class="name"><?= $valuechil1['title'] ?>
                                                 </div>
-                                                <div class="description"><?= $valuechil['describe'] ?>
+                                                <div class="description"><?= $valuechil1['describe'] ?>
                                                 </div>
                                             </a>
                                         </div>
@@ -241,7 +249,7 @@ function findModel($id)
                 <li class="top_layer_navigation pull-right" id="desktop_cart">
                     <div class="dropdown-hover">
                         <div class="header_bar_item cart-icon">
-                            <a href="https://www.lixibox.com/cart"><i class="fa fa-shopping-bag"></i>
+                            <a href=""><i class="fa fa-shopping-bag"></i>
                                 <span>Giỏ hàng</span>
                             </a>
                         </div>
@@ -251,7 +259,7 @@ function findModel($id)
                     </div>
                 </li>
                 <li class="top_layer_navigation pull-right wishlist-navigation">
-                    <a href="https://www.lixibox.com/user/wishlist">
+                    <a href="">
                         <span class="icon-wishlist">
                             <i class="fa fa-heart"></i>
                         </span>

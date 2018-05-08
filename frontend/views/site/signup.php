@@ -16,18 +16,17 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-4">
             <?php $form = ActiveForm::begin(); ?>
             <h2>Đăng ký</h2>
-            <div class="top-20">
-                <a class="btn btn-block facebook-btn" href="">
-                    <i class="fa fa-facebook"></i>
-                    Đăng nhập bằng Facebook
-                </a>
-            </div>
+
             <div class="or top-20 text-center">
-                hoặc đăng nhập bằng email và mật khẩu
+                Đăng nhập bằng email và mật khẩu
             </div>
             <div class="top-20">
                 <div class="form-group">
                     <label for="user_name">Họ Tên</label>
+                    <?= $form->field($model, 'full_name')->textInput(['maxlength' => true, 'autofocus' => 'autofocus'])->label(false) ?>
+                </div>
+                <div class="form-group">
+                    <label for="user_name">Username</label>
                     <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'autofocus' => 'autofocus'])->label(false) ?>
                 </div>
                 <div class="form-group">
