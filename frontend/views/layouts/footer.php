@@ -86,8 +86,8 @@
         <div class="row" id="address">
             <div class="col-sm-12">
                 <h4 class="small-title">ĐỊA CHỈ SHOP</h4>
-                <div>16 Phạm Ngọc Thạch, P.6, Q.3, HCM</div>
-                <div>(gần hồ con Rùa)</div>
+                <div>Km 10 Nguyễn Trãi, Hà Đông, Hà Nội</div>
+                <div>(gần hồ Văn Quán)</div>
                 <a href="https://www.google.com/maps/place/16+Ph%E1%BA%A1m+Ng%E1%BB%8Dc+Th%E1%BA%A1ch,+ph%C6%B0%E1%BB%9Dng+6,+Qu%E1%BA%ADn+3,+H%E1%BB%93+Ch%C3%AD+Minh,+Vietnam"
                    style="color: #333">
                     <i class="fa fa-hand-o-right"></i>
@@ -187,8 +187,8 @@
                     <div class="row" id="address">
                         <div class="col-sm-12">
                             <h4 class="small-title" style="margin-top: 15px;">ĐỊA CHỈ SHOP</h4>
-                            <div>16 Phạm Ngọc Thạch, P.6, Q.3, HCM</div>
-                            <div>(gần hồ con Rùa)</div>
+                            <div>Km 10 Nguyễn Trãi, Hà Đông, Hà Nội </div>
+                            <div>(gần hồ Văn Quán)</div>
                             <a class="btn-see-map" data-target="#modalMap" data-toggle="modal"
                                href="https://www.lixibox.com/#" style="color: #333">
                                 <i class="fa fa-hand-o-right"></i>
@@ -201,8 +201,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button class="close" data-dismiss="modal" type="button">×</button>
-                                            <h4 class="modal-title">LIXIBOX - 16 Phạm Ngọc Thạch, Phường 6, Quận 3, Hồ
-                                                Chí Minh</h4>
+                                            <h4 class="modal-title">Beauty Shop - Km 10 Nguyễn Trãi, Hà Đông, Hà Nội</h4>
                                         </div>
                                         <div class="modal-body">
                                             <div>

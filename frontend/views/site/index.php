@@ -4,7 +4,7 @@
 use yii\helpers\Url;
 use common\helpers\FunctionHelper;
 
-$this->title = 'My Yii Application';
+$this->title = 'Beauty Shop';
 ?>
 <div id="content">
     <section class="home-banners top-6">

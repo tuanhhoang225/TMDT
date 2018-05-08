@@ -59,6 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <th>STT</th>
                                 <th><?= Yii::t('app', 'Title') ?></th>
                                 <th><?= Yii::t('app', 'Key') ?></th>
+                                <th><?= Yii::t('app', 'Released') ?></th>
                                 <th><?= Yii::t('app', 'Action') ?></th>
                             </tr>
                             </thead>
@@ -69,14 +70,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <?= $key + 1 ?>
                                     </td>
                                     <td>
+                                        <?= $value['title']?>
+                                    </td>
+                                    <td>
                                         <?= $value['key'] ?>
                                     </td>
                                     <td>
                                         <div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini"
                                              style="border:none">
-                                            <input data-id="<?= $value['id'] ?>" data-api="ajax/enable-column"
-                                                   data-table="setting" data-column="status"
-                                                   type="checkbox" <?= $value['status'] ? 'checked="checked"' : '' ?>
+                                            <input data-id="<?= $value['id'] ?>" data-action="ajax/release"
+                                                   data-table="setting"
+                                                   type="checkbox" <?= $value['released'] ? 'checked="checked"' : '' ?>
                                                    title="" name="switch-checkbox">
                                         </div>
                                     </td>
@@ -84,6 +88,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <a href="<?= Url::to(['setting/update', 'id' => $value['id']]) ?>">
                                             <i class="fa fa-edit"></i>
                                         </a>
+                                        <?= Html::a(Yii::t('app', '<i class="fa fa-trash-o"></i>'), ['delete', 'id' => $value['id']], [
+                                            'data' => [
+                                                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                                                'method' => 'post',
+                                            ],
+                                        ]) ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

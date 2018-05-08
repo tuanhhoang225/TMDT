@@ -51,7 +51,12 @@ use yii\helpers\Url;
                     </div>
                     <div class="form-group">
                         <div class="col-md-12">
-                            <?= $form->field($model, 'images[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
+                            <?php if($model['images']):?>
+                            <?php foreach (json_decode($model['images']) as $k => $value):?>
+                            <img src="<?= $value ?>" style="width: 200px;" alt="">
+                            <?php endforeach;?>
+                            <?php endif; ?>
+                            <?= $form->field($model, 'photos[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
                         </div>
                     </div>
                     <div class="col-md-12">

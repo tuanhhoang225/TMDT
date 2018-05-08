@@ -1,11 +1,11 @@
 <?php
 
 use yii\helpers\Html;
-
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model common\models\Setting */
 
-$this->title = Yii::t('app', 'Update Setting: ' . $model->title, [
+$this->title = Yii::t('app', 'Cập nhật cấu hình: ' . $model->title, [
     'nameAttribute' => '' . $model->title,
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Settings'), 'url' => ['index']];
@@ -14,8 +14,24 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="setting-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
+    <section class="content-header">
+        <h1>
+            <?= Yii::t('app', 'Cập nhật cấu hình'); ?>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="<?= Url::to('site/index') ?>">
+                    <i class="fa fa-home"></i>
+                    <?= Yii::t('app', 'Home'); ?>
+                </a>
+            </li>
+            <li>
+                <a href="<?= Url::to(['setting/index']) ?>">
+                    <?= Yii::t('app', 'Setting'); ?>
+                </a>
+            </li>
+        </ol>
+    </section>
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
