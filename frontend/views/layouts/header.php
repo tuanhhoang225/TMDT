@@ -102,6 +102,9 @@ use common\helpers\FunctionHelper;
 </div>
 
 
+
+
+
         </script>
         <script id="searchNotFound" type="text/x-jsrender">
 <div class='box_card_container'>
@@ -110,6 +113,9 @@ use common\helpers\FunctionHelper;
 <p>Không có kểt quả nào phù hợp.</p>
 </div>
 </div>
+
+
+
 
 
         </script>
@@ -124,6 +130,9 @@ use common\helpers\FunctionHelper;
 </div>
 
 
+
+
+
         </script>
 
         <div class="search header_bar_item" id="search">
@@ -131,15 +140,32 @@ use common\helpers\FunctionHelper;
                   method="get"><input name="utf8" type="hidden" value="✓">
                 <div class="search_text">
                     <div class="typeahead_all search_type_all">
-                        <input type="text" name="q" id="autosearch" placeholder="Tìm kiếm..."
-                               class="query form-control search-realtime-input" autocomplete="off"
-                               >
-                        <div id="search-results-realtime"></div>
+                        <input type="text" name="q" id="key-word" placeholder="Tìm kiếm..."
+                               class="query form-control" autocomplete="off">
+                        <div class="product-box" style="display: none">
+                            <div class="col-xs-6 col-md-4">
+                                <div class="box_card">
+                                    <a href="">
+                                        <div box_id="3175" class="box_image">
+                                            <img class="image-product"
+                                                 data-src=""
+                                                 src="">
+                                        </div>
+                                    </a>
+                                    <a class="box_name" href=""></a>
+                                    <div class="box_price"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="search-auto" style="display: none">
+                            <div style="padding: 15px;" class="tu-anh">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <button class="search_submit btn lx-btn-primary">
-                    <i class="fa fa-search"></i>
-                    <i style="display: none" class="fa fa-spinner fa-pulse"></i>
+                    <i class="fa fa-search" id="icon-search"></i>
+                    <i style="display: none" class="fa fa-spinner fa-pulse" id="icon-search-1"></i>
                 </button>
             </form>
 
@@ -158,41 +184,42 @@ use common\helpers\FunctionHelper;
         <div class="clearfix" id="navigation">
             <div class="logo">
                 <a href="">
-                    <img width="24" height="24" alt="Lixibox Logo" src="/lixibox/images/logo_round-2a67b0e71e07b3b6675de9bda2cd327dfae0c73a41b7103fe72eb71b84cf9add.png">
+                    <img width="24" height="24" alt="Lixibox Logo"
+                         src="/lixibox/images/logo_round-2a67b0e71e07b3b6675de9bda2cd327dfae0c73a41b7103fe72eb71b84cf9add.png">
                 </a>
             </div>
             <ul id="desktop_browse_node_navigations">
                 <?php foreach (FunctionHelper::get_categories_by_parent_id() as $key => $value): ?>
                     <?php $children = FunctionHelper::get_categories_by_parent_id($value['id']); ?>
-                        <?php if (!$children): ?>
-                            <li class="top_layer_navigation sale-tag">
-                                <a href=""><?=$value['title']?></a>
-                            </li>
-                        <?php endif;?>
-                        <?php if ($children): ?>
-                            <li class="top_layer_navigation dropdown">
-                                <div class="dropdown-toggle" data-toggle="dropdown" type="hover">
-                                    <a href=""><?=$value['title']?>
-                                        <i class="fa fa-angle-down"></i>
-                                    </a>
-                                </div>
-                                <div class="dropdown-menu">
-                                    <?php foreach (FunctionHelper::get_categories_by_parent_id($value['id']) as $keychil => $valuechil): ?>
+                    <?php if (!$children): ?>
+                        <li class="top_layer_navigation sale-tag">
+                            <a href=""><?= $value['title'] ?></a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if ($children): ?>
+                        <li class="top_layer_navigation dropdown">
+                            <div class="dropdown-toggle" data-toggle="dropdown" type="hover">
+                                <a href=""><?= $value['title'] ?>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                            <div class="dropdown-menu">
+                                <?php foreach (FunctionHelper::get_categories_by_parent_id($value['id']) as $keychil => $valuechil): ?>
                                     <div class="inner beauty_boxes">
                                         <div class="node">
                                             <a href="">
-                                                <div class="name"><?=$valuechil['title']?>
+                                                <div class="name"><?= $valuechil['title'] ?>
                                                 </div>
-                                                <div class="description"><?=$valuechil['describe']?>
+                                                <div class="description"><?= $valuechil['describe'] ?>
                                                 </div>
                                             </a>
                                         </div>
                                     </div>
-                                    <?php endforeach;?>
-                                </div>
-                            </li>
-                        <?php endif;?>
-                <?php endforeach;?>
+                                <?php endforeach; ?>
+                            </div>
+                        </li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
                 <li class="top_layer_navigation pull-right" id="desktop_cart">
                     <div class="dropdown-hover">
                         <div class="header_bar_item cart-icon">

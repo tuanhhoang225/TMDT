@@ -16,7 +16,7 @@ class ParksAsset extends AssetBundle
         "/lixibox/css/main_page-41603f102546ee5f4abc48fb45d6ecdf3b936df4b3380df6e994e9bac29b94af.css",
         "/lixibox/css/main_page-2396999342c5e5e516d0fdcab76f9add59edea71d1db20c11b85645b61f22e51.css",
         "/lixibox/css/8cf388f984.css",
-
+        "/css/search.css"
 
     ];
     public $js = [
@@ -36,7 +36,8 @@ class ParksAsset extends AssetBundle
         "/lixibox/js/map.js",
         "/lixibox/js/marker.js",
         "/EasyAutocomplete/dist/jquery.easy-autocomplete.js",
-        "/js/autosearch.js"
+        "/js/autosearch.js",
+        "/js/bootstrap3-typeahead.js"
 
     ];
     public $depends = [

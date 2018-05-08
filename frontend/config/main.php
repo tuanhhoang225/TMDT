@@ -44,11 +44,12 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'suffix' => '.html',
             'rules' => [
-                '<category_slug>/<content_slug>' => 'site/view',
-                '<category_slug>'=> 'site/view',
-                '' => 'site/index'
+                [
+                    'pattern' => 'site/<category_slug:\s+>/<content_slug:\s+>',
+                    'route' => 'site/view',
+                    'suffix' => '.html'
+                ]
             ],
         ],
 

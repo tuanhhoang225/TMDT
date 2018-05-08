@@ -1,0 +1,14 @@
+#search-auto {
+    position: absolute;
+    left: 0;
+    top: 36px;
+    z-index: 20;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    transition: all 0.5s ease 0s;
+    box-shadow: 1px 5px 13px #777;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: #FFF;
+}
