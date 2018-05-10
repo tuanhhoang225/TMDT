@@ -3,6 +3,8 @@
 /* @var $this yii\web\View */
 use yii\helpers\Url;
 use common\helpers\FunctionHelper;
+use common\models\User;
+use yii\web\NotFoundHttpException;
 
 $this->title = 'Beauty Shop';
 ?>
@@ -227,27 +229,27 @@ $this->title = 'Beauty Shop';
                 </h3>
                 <div class="wrapper">
                     <div class="row top-30">
-<!--                        --><?php // $setting = FunctionHelper::get_setting_by_key("sang-lap") ?>
-<!--                            --><?php //foreach (json_decode($setting['images']) as $key => $value): ?>
-<!--                                <div class="item_expert col-xs-4 col-sm-2 col-md-2 bottom-20 l-padding-left-3 l-padding-right-3">-->
-<!--                                    <a title="" href="">-->
-<!--                                        <img alt="" class="lazyload img-responsive"-->
-<!--                                             src="--><?//= $value ?><!--">-->
-<!--                                        <span class="expert_name"></span>-->
-<!--                                    </a>-->
-<!--                                </div>-->
-<!--                        --><?php //endforeach; ?>
-<!--                        <div class="visible-xs top-10">-->
-<!--                            <a class="btn btn-default" id="more-experts" href="javascript:{}">Xem thêm chuyên gia</a>-->
-<!--                            <script>-->
-<!--                                $(function () {-->
-<!--                                    $("#more-experts").click(function () {-->
-<!--                                        $(".item_expert").removeClass("hidden-xs");-->
-<!--                                        $(this).hide();-->
-<!--                                    });-->
-<!--                                });-->
-<!--                            </script>-->
-<!--                        </div>-->
+                        <?php  $setting = FunctionHelper::get_setting_by_key("sang-lap") ?>
+                            <?php foreach (json_decode($setting['images']) as $key => $value): ?>
+                                <div class="item_expert col-xs-4 col-sm-2 col-md-2 bottom-20 l-padding-left-3 l-padding-right-3">
+                                    <a title="" href="">
+                                        <img alt="" class="lazyload img-responsive"
+                                             src="<?= $value ?>">
+                                        <span class="expert_name"></span>
+                                    </a>
+                                </div>
+                        <?php endforeach; ?>
+                        <div class="visible-xs top-10">
+                            <a class="btn btn-default" id="more-experts" href="javascript:{}">Xem thêm chuyên gia</a>
+                            <script>
+                                $(function () {
+                                    $("#more-experts").click(function () {
+                                        $(".item_expert").removeClass("hidden-xs");
+                                        $(this).hide();
+                                    });
+                                });
+                            </script>
+                        </div>
                     </div>
                 </div>
             </div>

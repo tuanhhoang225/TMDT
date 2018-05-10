@@ -3,7 +3,9 @@ var i = 0;
 $('#key-word').keyup(function () {
     var key = $("#key-word").val();
     if (key !== '') {
-
+        $("#search-auto").hide();
+        $("#icon-search-1").show();
+        $("#icon-search").hide();
         $.ajax({
             type: 'POST',
             dataType: 'json',

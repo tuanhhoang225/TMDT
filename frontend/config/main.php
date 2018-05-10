@@ -46,10 +46,17 @@ return [
             'showScriptName' => false,
             'rules' => [
                 [
+                    'pattern' => 'site/<category_slug:\s+>',
+                    'route' => 'site/view',
+                    'suffix' => '.html'
+                ],
+                [
                     'pattern' => 'site/<category_slug:\s+>/<content_slug:\s+>',
                     'route' => 'site/view',
                     'suffix' => '.html'
-                ]
+                ],
+
+
             ],
         ],
 

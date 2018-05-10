@@ -37,7 +37,7 @@ class ParksAsset extends AssetBundle
         "/lixibox/js/marker.js",
         "/EasyAutocomplete/dist/jquery.easy-autocomplete.js",
         "/js/autosearch.js",
-        "/js/bootstrap3-typeahead.js"
+        "/js/shopping-cart.js"
 
     ];
     public $depends = [

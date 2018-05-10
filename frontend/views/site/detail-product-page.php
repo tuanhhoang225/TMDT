@@ -7,8 +7,22 @@
  */
 use yii\helpers\Url;
 use common\helpers\FunctionHelper;
+use common\models\User;
+use yii\web\NotFoundHttpException;
 /** @var $category \common\models\Category */
 /** @var $product \common\models\Product */
+$user = null;
+
+if (!Yii::$app->user->isGuest) {
+    $user = findU(Yii::$app->user->identity->getId());
+}
+function findU($id)
+{
+    if (($model = User::findOne($id)) !== null) {
+        return $model;
+    }
+    return false;
+}
 
 ?>
 <div id="content">
@@ -73,12 +87,9 @@ use common\helpers\FunctionHelper;
                         <div class="hidden-md hidden-lg">
                         </div>
                         <div class="clearfix">
-                            <form id="add-box" action="/cart" accept-charset="UTF-8" data-remote="true" method="post">
-                                <input name="utf8" type="hidden" value="✓"><input type="hidden" name="_method" value="create">
-                                <input type="hidden" name="box_id" id="box_id" value="5963">
-                                <input type="hidden" name="theme_id" id="theme_id">
-                                <input type="hidden" name="purchase_type" id="purchase_type" value="0">
-                                <input type="submit" name="commit" value="Thêm vào giỏ" class="hidden-sm hidden-xs button add-to-cart-btn" data-disable-with="Đang thêm">
+                            <form id="add-box" action="" accept-charset="UTF-8" data-remote="true" method="post">
+
+                                <input type="submit" name="commit" value="Thêm vào giỏ" class="hidden-sm hidden-xs button add-to-cart-btn" onclick="add_cart(<?= $product['id'] ?>,<?= $user['id']?>)" data-disable-with="Đang thêm">
                             </form>
                             <div class="hidden-sm hidden-xs">
                                 <div class="box_detail_favourite">

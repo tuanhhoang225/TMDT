@@ -14,6 +14,7 @@ use common\models\OrderDetail;
 use common\models\Post;
 use common\models\Product;
 use common\models\Setting;
+use common\models\ShoppingCart;
 use yii\web\BadRequestHttpException;
 use fproject\components\DbHelper;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -261,13 +262,21 @@ class FunctionHelper
     }
 
 
-
+    /**
+     * @param $id_order_detail
+     * @return mixed
+     */
     public static function get_cost_order_detail_by_product($id_order_detail){
         $result = OrderDetail::find()->where(['=','order_detail.id',$id_order_detail])->one();
         $product = Product::findOne($result['product_id']);
         return $result['quantily'] * $product['price'];
 
     }
+
+    /**
+     * @param $id_order
+     * @return int|mixed
+     */
     public static function get_total_cost_order_by_order_detail($id_order)
     {
         $cost_order = 0;
@@ -299,8 +308,23 @@ class FunctionHelper
         $order = Order::find()->where(['=', 'user_id', $id_customer])->all();
         return count($order);
     }
+
+    /**
+     * @param $province_id
+     * @return string
+     */
     public static function get_shipping_by_province($province_id){
         $ship = Shipping::findOne($province_id);
         return $ship->cost;
     }
+
+    /**
+     * @param $user_id
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function get_shopping_cart_by_user_id($user_id){
+        return ShoppingCart::find()->where(['=','user_id',$user_id])->all();
+
+    }
+
 }

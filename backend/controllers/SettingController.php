@@ -11,11 +11,11 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use common\helpers\FunctionHelper;
-
+use backend\controllers\base\AdminController;
 /**
  * SettingController implements the CRUD actions for Setting model.
  */
-class SettingController extends Controller
+class SettingController extends AdminController
 {
     /**
      * {@inheritdoc}

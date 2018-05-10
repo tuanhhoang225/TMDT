@@ -9,10 +9,11 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\Pagination;
+use backend\controllers\base\AdminController;
 /**
  * CustomerController implements the CRUD actions for User model.
  */
-class CustomerController extends Controller
+class CustomerController extends AdminController
 {
     /**
      * {@inheritdoc}

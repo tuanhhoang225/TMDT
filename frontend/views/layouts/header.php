@@ -225,7 +225,7 @@ function findModel($id)
                     <?php if ($children): ?>
                         <li class="top_layer_navigation dropdown">
                             <div class="dropdown-toggle" data-toggle="dropdown" type="hover">
-                                <a href=""><?= $value['title'] ?>
+                                <a href="<?= Url::to(['site/view', 'category_slug' => $value['slug']]) ?>"><?= $value['title'] ?>
                                     <i class="fa fa-angle-down"></i>
                                 </a>
                             </div>
@@ -233,7 +233,7 @@ function findModel($id)
                                 <?php foreach (FunctionHelper::get_categories_by_parent_id($value['id']) as $keychil1 => $valuechil1): ?>
                                     <div class="inner beauty_boxes">
                                         <div class="node">
-                                            <a href="">
+                                            <a href="<?= Url::to(['site/view', 'category_slug' => $value['slug']]) ?>">
                                                 <div class="name"><?= $valuechil1['title'] ?>
                                                 </div>
                                                 <div class="description"><?= $valuechil1['describe'] ?>
@@ -249,7 +249,7 @@ function findModel($id)
                 <li class="top_layer_navigation pull-right" id="desktop_cart">
                     <div class="dropdown-hover">
                         <div class="header_bar_item cart-icon">
-                            <a href=""><i class="fa fa-shopping-bag"></i>
+                            <a href="../site/shopping-cart"><i class="fa fa-shopping-bag"></i>
                                 <span>Giỏ hàng</span>
                             </a>
                         </div>

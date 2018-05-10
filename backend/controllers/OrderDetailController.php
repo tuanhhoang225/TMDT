@@ -8,11 +8,11 @@ use common\models\base\OrderDetailSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use backend\controllers\base\AdminController;
 /**
  * OrderDetailController implements the CRUD actions for OrderDetail model.
  */
-class OrderDetailController extends Controller
+class OrderDetailController extends AdminController
 {
     /**
      * {@inheritdoc}

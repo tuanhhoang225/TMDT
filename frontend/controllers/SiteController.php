@@ -14,7 +14,8 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
-
+use common\models\User;
+use yii\web\NotFoundHttpException;
 /**
  * Site controller
  */
@@ -71,9 +72,18 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+    public function findModelUser($id)
+    {
+        if (($model = User::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist . ');
+        }
+    }
 
     public function actionView($category_slug, $content_slug = null)
     {
+
         $category = FunctionHelper::get_category_by_slug($category_slug);
 
         $product = FunctionHelper::get_product_by_slug($content_slug);
@@ -204,6 +214,20 @@ class SiteController extends Controller
     }
 
     /**
+     * @return string
+     */
+    public function actionShoppingCart(){
+        return $this->render('shopping-cart');
+    }
+
+    /**
+     * @return string
+     */
+    public function actionOrder(){
+        return $this->render('order');
+    }
+
+    /**
      * Requests password reset.
      *
      * @return mixed
@@ -251,4 +275,5 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
 }

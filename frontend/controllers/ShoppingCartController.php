@@ -1,20 +1,18 @@
 <?php
 
-namespace backend\controllers;
+namespace frontend\controllers;
 
 use Yii;
-use common\models\Category;
-use common\models\base\CategorySearch;
+use common\models\ShoppingCart;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use common\helpers\FunctionHelper;
-use yii\data\Pagination;
-use backend\controllers\base\AdminController;
+
 /**
- * CategoryController implements the CRUD actions for Category model.
+ * ShoppingCartController implements the CRUD actions for ShoppingCart model.
  */
-class CategoryController extends AdminController
+class ShoppingCartController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -32,55 +30,40 @@ class CategoryController extends AdminController
     }
 
     /**
-     * Lists all Category models.
+     * Lists all ShoppingCart models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $query = Category::find();
-        $pagination = new Pagination([
-            'defaultPageSize' => 10,
-            'totalCount' => $query->count(),
-        ]);
 
-        $categorys = $query->offset($pagination->offset)->limit($pagination->limit)
-            ->orderBy('id DESC')->all();
         return $this->render('index', [
-            'categorys' => $categorys,
-            'pages'=>$pagination
         ]);
     }
 
     /**
-     * Displays a single Category model.
+     * Displays a single ShoppingCart model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-        $categorys = Category::find()->all();
-        return $this->render('index', [
-            'categorys'=>$categorys,
-            //'model' => $this->findModel($id),
+        return $this->render('view', [
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Category model.
+     * Creates a new ShoppingCart model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Category();
+        $model = new ShoppingCart();
 
-        if ($model->load(Yii::$app->request->post()) ) {
-            $slug = $model->title;
-            $model->save();
-            $model->slug = FunctionHelper::changeTitle($slug)."-".$model->id;
-            $model->save();
-            return $this->redirect(['index']);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -89,7 +72,7 @@ class CategoryController extends AdminController
     }
 
     /**
-     * Updates an existing Category model.
+     * Updates an existing ShoppingCart model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -100,7 +83,7 @@ class CategoryController extends AdminController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index',]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -109,7 +92,7 @@ class CategoryController extends AdminController
     }
 
     /**
-     * Deletes an existing Category model.
+     * Deletes an existing ShoppingCart model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -119,19 +102,19 @@ class CategoryController extends AdminController
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['/site/shopping-cart']);
     }
 
     /**
-     * Finds the Category model based on its primary key value.
+     * Finds the ShoppingCart model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Category the loaded model
+     * @return ShoppingCart the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Category::findOne($id)) !== null) {
+        if (($model = ShoppingCart::findOne($id)) !== null) {
             return $model;
         }
 

@@ -19,12 +19,14 @@ class m180409_143626_create_shopping_cart_table extends Migration
         }
         $this->createTable('shopping_cart', [
             'id' => $this->primaryKey(),
-            'product_id'=>$this->integer(),
-            'quantily'=>$this->integer(),
-            'user_id'=>$this->integer(),
+            'user_id'=>$this->integer()->notNull(),
+            'product_id'=>$this->integer()->notNull(),
+            'quantily'=>$this->integer()->notNull(),
+            'date_time'=>$this->dateTime()
         ],$tableOptions);
-        $this->addForeignKey('fk_shopping_cart_product','shopping_cart','product_id','product','id','CASCADE');
         $this->addForeignKey('fk_shopping_cart_user','shopping_cart','user_id','user','id','CASCADE');
+        $this->addForeignKey('fk_shopping_cart_product','shopping_cart','product_id','product','id','CASCADE');
+
     }
 
     /**

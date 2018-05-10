@@ -10,10 +10,11 @@ use common\models\ThongTinChung;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use common\models\Shipping;
+use backend\controllers\base\AdminController;
 /**
  * ThongTinChungController implements the CRUD actions for ThongTinChung model.
  */
-class ThongTinChungController extends Controller
+class ThongTinChungController extends AdminController
 {
 
 
